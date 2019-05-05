@@ -135,7 +135,7 @@ return (
         <th scope="col">장르</th>
         <th scope="col">재고</th>
         <th scope="col">평점</th>
-        <th /> <!-- 추가 -->
+        <th />
       </tr>
     </thead>
     <tbody>
