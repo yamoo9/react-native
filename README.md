@@ -2,6 +2,12 @@
 
 JavaScript + React → Native App(iOS, Android) 😍
 
+### 🤐 학습 자료
+
+React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행합니다.
+
+[react-01.zip](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
+
 ## React 라이브러리
 
 [React](https://ko.reactjs.org/)는 UI를 구현하는 JavaScript 라이브러리로 현재 전 세계적으로 가장 사용율이 높으며,
@@ -24,9 +30,3 @@ JavaScript + React → Native App(iOS, Android) 😍
 1. Event Handling
 1. Commnication
 1. Form
-
-### 🤐 학습 자료
-
-React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행합니다.
-
-[react-01.zip](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
