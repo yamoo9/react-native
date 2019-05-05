@@ -1,0 +1,310 @@
+::-moz-selection {
+  background: #233d84;
+  color: #ffffff;
+}
+
+::selection {
+  background: #233d84;
+  color: #ffffff;
+}
+
+body * {
+  -webkit-tap-highlight-color: rgba(255,255,200,0.3);
+  tap-highlight-color: rgba(255,255,200,0.3);
+}
+
+body {
+  margin: 0 auto;
+  max-width: 840px;
+  min-height: 100vh;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a img {
+  vertical-align: middle;
+}
+
+
+
+/* --------------------------------------------
+ * 헤더 디자인 */
+.app-header {
+  position: fixed;
+  z-index: 600;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.4);
+  margin-bottom: 30px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* 브랜드 디자인 */
+.brand {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.brand a {
+  display: block;
+  width: 152px;
+  height: 15px;
+  padding: 26px;
+  background: url("../images/ediya-logo.gif") no-repeat center;
+  background-size: 152px 15px;
+}
+
+/* 내비게이션 디자인 */
+.app-navigation {
+  overflow: hidden;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 60px;
+  background: hsla(225, 57%, 10%, 0.9);
+  color: #fff;
+  transition: all 0.4s cubic-bezier(0.66,-0.01, 0.3, 0.99);
+  -webkit-transform: translateX(105vw);
+          transform: translateX(105vw);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+}
+
+.app-navigation.is-active {
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.app-navigation li {
+  border-bottom: 1px solid hsla(225, 57%, 30%, 0.5);
+}
+
+.app-navigation a {
+  display: block;
+  padding: 1em;
+  transition: all 0.4s ease;
+}
+
+.app-navigation a:hover,
+.app-navigation a:focus {
+  background: #2e437c;
+}
+
+/* 버튼 디자인 */
+.app-header .button.is-open {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  padding: 20px;
+  background: #ffffff;
+  transition: all 0.3s ease;
+}
+.app-header .button.is-open:hover,
+.app-header .button.is-open:focus {
+  background: #f5f5f5;
+}
+
+.app-navigation .button.is-close-menu {
+  position: absolute;
+  z-index: 10;
+  top: 10px;
+  right: 10px;
+  padding: 20px;
+  background: transparent;
+  color: #fff;
+  font-weight: 100;
+  font-size: 40px;
+  line-height: 0.5;
+  transition: all 0.4s ease;
+}
+
+.app-navigation .button.is-close-menu:hover {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+
+/* --------------------------------------------
+ * 메인 디자인 */
+.app-main {
+  margin-top: 90px;
+  max-width: 960px;
+  margin-left: 20px;
+  margin-right: 20px;
+  box-sizing: border-box;
+  margin-bottom: 40px;
+}
+
+@media screen and (min-width: 960px) {
+  .app-main {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 메뉴 디자인 */
+.ediya-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.ediya-menu__item {
+  position: relative;
+  flex: 1 1 40%;
+  margin: 10px 10px;
+}
+
+.ediya-menu__item a {
+  display: block;
+  background: #f5f5f5;
+  text-decoration: none;
+  color: #464646;
+}
+
+.ediya-menu__item figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.ediya-menu__item img {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  max-width: 330px;
+  min-width: 240px;
+  width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-transform: scale(0.85);
+          transform: scale(0.85);
+  transition: all 0.4s ease;
+}
+
+.ediya-menu__item a:hover img {
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+}
+
+.ediya-menu__item figcaption {
+  margin-top: -5px;
+  margin-bottom: 25px;
+}
+
+.ediya-menu__item--detail {
+  opacity: 0;
+  position: absolute;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid #e0e0e0;
+  padding: 30px 20px;
+  background: rgba(255,255,255,0.6);
+  transition: all 0.6s ease;
+}
+.ediya-menu__item--detail.is-active {
+  opacity: 1;
+}
+
+.ediya-menu__item--name {
+  display: block;
+  border-bottom: solid 2px #202023;
+  padding-bottom: 1em;
+  font-weight: 400;
+  font-size: 18px;
+  color: #202022;
+}
+
+.ediya-menu__item--name span {
+  display: block;
+  font-size: 14px;
+  color: #939394;
+}
+
+.ediya-menu__item--detail p {
+  line-height: 1.6;
+  font-size: 13px;
+}
+
+.ediya-menu__item--multi-column {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
+  -webkit-column-fill: auto;
+          column-fill: auto;
+  -webkit-column-rule: 1px solid #aaa;
+          column-rule: 1px solid #aaa;
+  padding: 1em 1.5em;
+  background: #f8f8f8;
+}
+
+.ediya-menu__item--multi-column.is-2 {
+  -webkit-column-count: 2;
+          column-count: 2;
+}
+
+.ediya-menu__item--multi-column p {
+  margin: 0;
+}
+
+.ediya-menu__item--multi-column span {
+  display: block;
+}
+
+.ediya-menu__item--detail .button.is-close-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 9px 15px;
+  font-size: 24px;
+  background: transparent;
+  transition: all 0.3s ease;
+}
+
+.ediya-menu__item--detail .button.is-close-panel:hover {
+  background: #f3f3f3;
+}
+
+/* --------------------------------------------
+ * 공통 클래스 */
+.reset-list {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.button {
+  cursor: pointer;
+  border: none;
+}
+
+.a11y-hidden {
+  overflow: hidden;
+  position: absolute !important;
+  top: -9999em;
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>이디야(Ediya) UI</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"
+  >
+  <link
+    rel="stylesheet"
+    href="./css/style.css"
+  >
+</head>
+
+<body>
+  <header class="app-header">
+    <h1 class="brand">
+      <a
+        href="https://www.ediya.com/"
+        target="_blank"
+      >
+        <span class="a11y-hidden">EDIYA COFFEE</span>
+      </a>
+    </h1>
+    <button
+      type="button"
+      class="button is-open"
+    >
+      <img
+        src="./images/navigation-button.gif"
+        alt="메뉴 열기"
+      >
+    </button>
+    <nav
+      hidden
+      class="app-navigation"
+    >
+      <ul class="reset-list">
+        <li><a href="#">메뉴</a></li>
+        <li><a href="#">이디야멤버스</a></li>
+        <li><a href="#">이디야커피랩</a></li>
+        <li><a href="#">이디야컬쳐랩</a></li>
+        <li><a href="#">공지사항</a></li>
+        <li><a href="#">매장찾기</a></li>
+      </ul>
+      <button
+        type="button"
+        class="button is-close-menu"
+        aria-label="메뉴 닫기"
+      >×</button>
+    </nav>
+  </header>
+  <main class="app-main">
+    <ul class="ediya-menu reset-list">
+      <li class="ediya-menu__item">
+        <a href="#">
+          <figure>
+            <img
+              src="./images/ICED-벚꽃라떼.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>ICED 벚꽃라떼</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">ICED 벚꽃라떼<span lang="en">Cherry Blossom Latte</span></strong>
+          <p>은은한 벚꽃향과 라즈베리 화이트 초콜릿 토핑이 올라간 핑크빛 라떼</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(393kcal)</b></span>
+              <span>당류<b>(35g)</b></span>
+              <span>단백질<b>(7g)</b></span>
+              <span>포화지방<b>(18.6g)</b></span>
+              <span>나트륨<b>(149mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/HOT-벚꽃라떼.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>HOT 벚꽃라떼</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">HOT 벚꽃라떼<span lang="en">Cherry Blossom Latte</span></strong>
+          <p>은은한 벚꽃향과 라즈베리 화이트 초콜릿 토핑이 올라간 핑크빛 라떼</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(430kcal)</b></span>
+              <span>당류<b>(38g)</b></span>
+              <span>단백질<b>(10g)</b></span>
+              <span>포화지방<b>(19.0g)</b></span>
+              <span>나트륨<b>(190mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/ICED-브라우니-쇼콜라.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>ICED 브라우니 쇼콜라</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">ICED 브라우니 쇼콜라<span lang="en">Brownie Chocolate</span></strong>
+          <p>깊고 진한 초콜릿의 맛에 부드러운 휘핑크림과 브라우니를 함께 어울러져 고급스러운 디저트 같은 초콜릿 음료</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(503kcal)</b></span>
+              <span>당류<b>(42g)</b></span>
+              <span>단백질<b>(9g)</b></span>
+              <span>포화지방<b>(20.8g)</b></span>
+              <span>나트륨<b>(262mg)</b></span>
+              <span>카페인<b>(12mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/HOT-브라우니-쇼콜라.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>HOT 브라우니 쇼콜라</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">HOT 브라우니 쇼콜라<span lang="en">Brownie Chocolate</span></strong>
+          <p>깊고 진한 초콜릿의 맛에 부드러운 휘핑크림과 브라우니를 함께 어울러져 고급스러운 디저트 같은 초콜릿 음료</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(503kcal)</b></span>
+              <span>당류<b>(42g)</b></span>
+              <span>단백질<b>(9g)</b></span>
+              <span>포화지방<b>(20.9g)</b></span>
+              <span>나트륨<b>(299mg)</b></span>
+              <span>카페인<b>(12mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/제주청귤-오리지널.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>제주청귤 오리지널</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">제주청귤 오리지널<span lang="en">Jeju Green Tangerine Tea</span></strong>
+          <p>청정 제주지역에서 자라난 귀한 청귤의 풍부한 과육을 맛볼 수 있는 새콤달콤한 홈메이드 스타일 과일차</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(218kcal)</b></span>
+              <span>당류<b>(51g)</b></span>
+              <span>단백질<b>(0g)</b></span>
+              <span>포화지방<b>(0.1g)</b></span>
+              <span>나트륨<b>(4mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/제주청귤-블라썸.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>제주청귤 블라썸</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">제주청귤 블라썸<span lang="en">Jeju Green Tangerine Blossom</span></strong>
+          <p>청귤의 새콤함이 복숭아, 포도 등의 다양한 과일향과 함께 어우러져 밸런스가 훌륭한 블렌딩티</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(202kcal)</b></span>
+              <span>당류<b>(46g)</b></span>
+              <span>단백질<b>(1g)</b></span>
+              <span>포화지방<b>(0.1g)</b></span>
+              <span>나트륨<b>(5mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/석류-오리지널.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>석류 오리지널</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">석류 오리지널<span lang="en">Pomegranate Tea</span></strong>
+          <p>석류 특유의 산뜻한 향과 깔끔한 뒷맛이 느껴지며, 과육이 한알 한알 살아있는 붉은 빛의 매력적인 과일차</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(210kcal)</b></span>
+              <span>당류<b>(42g)</b></span>
+              <span>단백질<b>(0g)</b></span>
+              <span>포화지방<b>(0.1g)</b></span>
+              <span>나트륨<b>(5mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+      <li class="ediya-menu__item">
+        <a
+          href="#"
+          target="_blank"
+        >
+          <figure>
+            <img
+              src="./images/석류-애플라임.png"
+              alt
+              width="323"
+              height="323"
+            >
+            <figcaption>석류 애플라임</figcaption>
+          </figure>
+        </a>
+        <div
+          hidden
+          class="ediya-menu__item--detail"
+        >
+          <strong class="ediya-menu__item--name">석류 애플라임<span lang="en">Pomegranate Apple Lime</span></strong>
+          <p>산뜻한 석류에 다양한 과일과 꽃, 그리고 샴페인의 향이 더해져 보다 깊고 중후한 맛이 느껴지는 블렌딩티</p>
+          <div class="ediya-menu__item--multi-column is-2">
+            <p>
+              <span>칼로리<b>(220kcal)</b></span>
+              <span>당류<b>(42g)</b></span>
+              <span>단백질<b>(1g)</b></span>
+              <span>포화지방<b>(0.1g)</b></span>
+              <span>나트륨<b>(7mg)</b></span>
+              <span>카페인<b>(0mg)</b></span>
+            </p>
+          </div>
+          <button
+            type="button"
+            class="button is-close-panel"
+            aria-label="아이템 소개 패널 닫기"
+          >×</button>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <script src='./js/helper.js'></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
