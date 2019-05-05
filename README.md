@@ -37,4 +37,4 @@ services/
 
 ### 🤐 학습 자료
 
-[js-env.zip](https://github.com/yamoo9/react-native/archive/js-env.zip) 다운로드
+[es-next.zip](https://github.com/yamoo9/react-native/archive/es-next.zip) 다운로드
