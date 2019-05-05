@@ -6,7 +6,7 @@ JavaScript + React → Native App(iOS, Android) 😍
 
 React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행합니다.
 
-[react-01.zip](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
+➪ [학습 자료](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
 
 <br>
 
