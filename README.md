@@ -76,19 +76,15 @@ export default App
 
 #### 무비, 장르 서비스 추가
 
-모던 JavaScript 실습 과정에서 작성한 services 디렉토리를 프로젝트 루트 위치로 이동시킵니다.
+모던 JavaScript 실습 과정에서 작성한 services 디렉토리를 프로젝트 `src/` 위치로 이동시킵니다.
+
+> 필요한 부분에 `export`를 추가해 모듈을 내보내도록 설정합니다.
 
 ```sh
-.
-├── services/
-│   ├── genreService.js
-│   └── movieService.js
-├── README.md
-├── node_modules/
-├── public/
-├── src/
-├── package.json
-└── yarn.lock
+src/
+└── services/
+    ├── genreService.js
+    └── movieService.js
 ```
 
 #### 프로젝트 시작
