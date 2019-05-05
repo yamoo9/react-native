@@ -126,7 +126,7 @@ const movies = [
  * getMovies()
  * - 모든 무비 데이터(배열 복제) 반환
  */
-export const getMovies = () => movies.slice()
+const getMovies = () => movies.slice()
 
 /**
  * getMovie(id)
@@ -145,7 +145,7 @@ export const getMovie = id => getMovies().find(m => m._id === id)
  * - numberInStock
  * - dailyRentalRate
  */
-export const saveMovie = movie => {
+const saveMovie = movie => {
   const movieInDb = getMovies().find(m => m._id === movie._id) || {}
   const { title, numberInStock, dailyRentalRate } = movie
   movieInDb.title = title
@@ -163,7 +163,7 @@ export const saveMovie = movie => {
  * deleteMovie(id)
  * - 전달 받은 id와 일치하는 무비 데이터(객체) 삭제 후, 삭제된 무비(객체) 반환
  */
-export const deleteMovie = id => {
+const deleteMovie = id => {
   const movieInDb = getMovies().find(m => m._id === String(id))
   const index = movies.indexOf(movieInDb)
   movies.splice(index, 1)
