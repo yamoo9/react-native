@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import { getMovies } from '../services/movieService'
+import { paginate } from '../utils/paginate'
 import LikeButton from './common/LikeButton'
+import Pagination from './common/Pagination'
 
 class Movies extends Component {
   state = {
     movies: [],
+    currentPage: 1,
+    pageSize: 3,
   }
   componentDidMount() {
     this.setState({
@@ -25,8 +29,16 @@ class Movies extends Component {
       movies,
     })
   }
+  handlePageChange = (page, e) => {
+    e.preventDefault()
+    this.setState({
+      currentPage: page,
+    })
+  }
   render() {
+    const { currentPage, pageSize, movies: allMovies } = this.state
     const { length: count } = this.state.movies
+    const movies = paginate(allMovies, currentPage, pageSize)
 
     if (count === 0) {
       return (
@@ -53,7 +65,7 @@ class Movies extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.state.movies.map(movie => (
+              {movies.map(movie => (
                 <tr key={movie._id}>
                   <td>
                     <img
@@ -84,6 +96,12 @@ class Movies extends Component {
               ))}
             </tbody>
           </table>
+          <Pagination
+            itemsCount={count}
+            currentPage={currentPage}
+            pageSize="pageSize"
+            onPageChange={this.handlePageChange}
+          />
         </React.Fragment>
       )
     }
