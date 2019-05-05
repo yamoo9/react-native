@@ -6,67 +6,37 @@ JavaScript + React → Native App(iOS, Android) 😍
 
 React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행합니다.
 
-➪ [학습 자료](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
+➪ [학습 자료](https://github.com/yamoo9/react-native/archive/react-02-ex.zip) 다운로드
 
 <br>
 
-## Movidly 프로젝트
+## Movies 컴포넌트
 
-#### Create React App
+### 컴포넌트 생성
 
-[yarn](https://yarnpkg.org) 패키지를 사용해 React 프로젝트 **Movidly**를 생성합니다.
+`src/components/movies.jsx` 파일을 생성합니다.
 
-```sh
-$ yarn create react-app movidly
-$ cd movidly
+```jsx
+import React, { Component } from 'react'
+
+class Movies extends Component {
+  render() {
+    return <h2>Movies 컴포넌트</h2>
+  }
+}
+
+export default Movies
 ```
 
-#### UI 프레임워크 추가
+이어서 `src/App.jsx`에서 Movies 컴포넌트를 불러와 JSX 구문을 사용해 React 요소를 추가합니다.
 
-프로젝트를 신속하게 진행하기 위해 [Bootstrap](https://getbootstrap.com/), [FontAwesome](https://fontawesome.com/)을 프로젝트에 추가합니다.
-
-```sh
-$ yarn add bootstrap font-awesome
-```
-
-#### 설치한 UI 프레임워크 로드
-
-프로젝트 루트 위치에서 `index.js` 파일을 열어 다음 코드를 작성합니다.
-
-```js
-import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
-```
-
-#### index.html 수정
-
-public/index.html 파일을 열어 아래 부분을 찾아 수정합니다.
-
-```html
-<!DOCTYPE html>
-<html lang="ko-KR">
-  <!-- ... -->
-  <title>Movidly</title>
-  <!-- ... -->
-</html>
-<body>
-  <noscript>이 앱을 정상적으로 실행시키려면 JavaScript를 실행할 수 있어야 합니다.</noscript>
-  <!-- ... -->
-</body>
-```
-
-#### App 템플릿 작성
-
-[Bootstrap Start Template](https://getbootstrap.com/docs/4.3/examples/starter-template/)을 참고해 `App.jsx` 파일에 JSX를 작성합니다.
-
-```js
-import React from 'react'
-import './App.css'
+```jsx
+import Movies from './components/movies'
 
 function App() {
   return (
-    <main className="container" role="main">
-      <h1>헬로! React</h1>
+    <main className="container">
+      <Movies />
     </main>
   )
 }
@@ -74,27 +44,143 @@ function App() {
 export default App
 ```
 
-#### 무비, 장르 서비스 추가
+### 테이블 마크업
 
-모던 JavaScript 실습 과정에서 작성한 services 디렉토리를 프로젝트 루트 위치로 이동시킵니다.
+[Bootstrap > Tables](https://getbootstrap.com/docs/4.3/content/tables/) 구조를 참고해
+"무비 대여/평점 표"를 Movies 컴포넌트에 작성합니다.
+\<caption\> 요소에 추가된 [sr-only](https://getbootstrap.com/docs/4.3/utilities/screen-readers/)는 스크린 리더에서만 읽히도록 설정하는 유틸리티 클래스 입니다.
 
-```sh
-.
-├── services/
-│   ├── genreService.js
-│   └── movieService.js
-├── README.md
-├── node_modules/
-├── public/
-├── src/
-├── package.json
-└── yarn.lock
+```jsx
+return (
+  <table className="table">
+    <caption className="sr-only">무비 대여/평점 표</caption>
+    <thead>
+      <tr>
+        <th scope="col">이름</th>
+        <th scope="col">장르</th>
+        <th scope="col">재고</th>
+        <th scope="col">평점</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>영화 이름</td>
+        <td>영화 장르</td>
+        <td>영화 재고</td>
+        <td>영화 평점</td>
+      </tr>
+    </tbody>
+  </table>
+)
 ```
 
-#### 프로젝트 시작
+### 영화 서비스 → 상태 업데이트
 
-프로젝트를 시작한 후, 정상적으로 UI 프레임워크를 불러왔는지 확인합니다.
+무비 서비스를 불러온 후, `getMovies()` 함수를 사용해 '마운트 이후' 시점에 상태(state)를 업데이트 합니다.
 
-```sh
-$ yarn start
+```jsx
+import { getMovies } from '../services/movieService'
+
+class Movie extends Component {
+  state = {
+    movies: [],
+  }
+  componentDidMount() {
+    this.setState({
+      movies: getMovies(),
+    })
+  }
+}
+```
+
+### 테이블 리스트 렌더링
+
+[Bootstrap > Images](https://getbootstrap.com/docs/4.3/content/images/) 구조를 참고해 영화 이름(포스터 포함), 장르, 재고, 평점을 JSX 코드로 리스트 렌더링 합니다.
+
+```jsx
+<tbody>
+  {this.state.movies.map(movie => (
+    <tr key={movie._id}>
+      <td>
+        <img
+          className="img-thumbnail float-left"
+          src={movie.image}
+          style={{ maxWidth: 80, marginRight: 10 }}
+          alt
+        />
+        {movie.title}
+      </td>
+      <td>{movie.genre.name}</td>
+      <td>{movie.numberInStock}</td>
+      <td>{movie.dailyRentalRate}</td>
+    </tr>
+  ))}
+</tbody>
+```
+
+### 제거 버튼 이벤트 핸들링
+
+[Bootstrap > Buttons](https://getbootstrap.com/docs/4.3/components/buttons/) 구조를 참고해 테이블 행을 제거하는 버튼을 추가합니다.
+
+```jsx
+return (
+  <table className="table">
+    <caption className="sr-only">무비 대여/평점 표</caption>
+    <thead>
+      <tr>
+        <th scope="col">이름</th>
+        <th scope="col">장르</th>
+        <th scope="col">재고</th>
+        <th scope="col">평점</th>
+        <th /> <!-- 추가 -->
+      </tr>
+    </thead>
+    <tbody>
+      {this.state.movies.map(movie => (
+        <tr key={movie._id}>
+          <td>
+            <img
+              className="img-thumbnail float-left"
+              src={movie.image}
+              style={{ maxWidth: 80, marginRight: 10 }}
+              alt=""
+            />
+            {movie.title}
+          </td>
+          <td>{movie.genre.name}</td>
+          <td>{movie.numberInStock}</td>
+          <td>{movie.dailyRentalRate}</td>
+          <td>
+            <button className="btn btn-dark btn-sm">제거</button>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)
+```
+
+테이블 행을 지우는 `handleDelete()` 컴포넌트 메서드를 작성한 후,
+버튼 요소 클릭 이벤트에 연결합니다.
+
+```jsx
+class Movies exntends Component {
+  // ...
+  handleDelete = movie => {
+    const movies = this.state.movies.filter(m => m._id !== movie._id)
+    this.setState({
+      movies,
+    })
+  }
+  render() {
+    return (
+      // ...
+      <button
+        onClick={e => this.handleDelete(movie)}
+        className="btn btn-dark btn-sm">
+        제거
+      </button>
+    )
+  }
+}
 ```
