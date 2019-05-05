@@ -126,13 +126,13 @@ const movies = [
  * getMovies()
  * - 모든 무비 데이터(배열 복제) 반환
  */
-const getMovies = () => movies.slice()
+export const getMovies = () => movies.slice()
 
 /**
  * getMovie(id)
  * - 전달 받은 id와 일치하는 무비 데이터(객체) 반환
  */
-export const getMovie = id => getMovies().find(m => m._id === id)
+const getMovie = id => getMovies().find(m => m._id === id)
 
 /**
  * saveMovie(movie)
