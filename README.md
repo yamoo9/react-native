@@ -38,6 +38,23 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 ```
 
+#### index.html 수정
+
+public/index.html 파일을 열어 아래 부분을 찾아 수정합니다.
+
+```html
+<!DOCTYPE html>
+<html lang="ko-KR">
+  <!-- ... -->
+  <title>Movidly</title>
+  <!-- ... -->
+</html>
+<body>
+  <noscript>이 앱을 정상적으로 실행시키려면 JavaScript를 실행할 수 있어야 합니다.</noscript>
+  <!-- ... -->
+</body>
+```
+
 #### App 템플릿 작성
 
 [Bootstrap Start Template](https://getbootstrap.com/docs/4.3/examples/starter-template/)을 참고해 `App.jsx` 파일에 JSX를 작성합니다.
