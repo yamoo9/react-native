@@ -23,10 +23,10 @@ $ cd movidly
 
 #### UI 프레임워크 추가
 
-프로젝트를 신속하게 진행하기 위해 [Bootstrap](https://getbootstrap.com/), [FontAwesome](https://fontawesome.com/)을 프로젝트에 추가합니다.
+프로젝트를 신속하게 진행하기 위해 [Bootstrap](https://getbootstrap.com/)을 프로젝트에 추가합니다.
 
 ```sh
-$ yarn add bootstrap font-awesome
+$ yarn add bootstrap
 ```
 
 #### 설치한 UI 프레임워크 로드
@@ -35,7 +35,6 @@ $ yarn add bootstrap font-awesome
 
 ```js
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
 ```
 
 #### index.html 수정
