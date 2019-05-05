@@ -6,12 +6,12 @@
 /**
  * genreService 모듈에서 getGenreByName 멤버 추출
  */
-
+import { getGenreByName } from './genreService'
 
 /**
  * 무비(Movies)
  */
-var movies = [
+const movies = [
   {
     _id: "5b21ca3eeb7f6fbccd471815",
     title: "어벤져스: 엔드게임",
@@ -126,13 +126,13 @@ var movies = [
  * getMovies()
  * - 모든 무비 데이터(배열 복제) 반환
  */
-
+const getMovies = () => movies.slice()
 
 /**
  * getMovie(id)
  * - 전달 받은 id와 일치하는 무비 데이터(객체) 반환
  */
-
+const getMovie = id => getMovies().find(m => m._id === id)
 
 /**
  * saveMovie(movie)
@@ -140,14 +140,30 @@ var movies = [
  * --------------------------------------------------------------------
  * 새로운 무비 객체 정보
  * - _id (없을 경우 Date.now() 이용)
- * - name
+ * - title
  * - genre(genreServie.getGenreByName 이용)
  * - numberInStock
  * - dailyRentalRate
  */
-
+const saveMovie = movie => {
+  const movieInDb = getMovies().find(m => m._id === movie._id) || {}
+  const { title, numberInStock, dailyRentalRate } = movie
+  movieInDb.title = title
+  movieInDb.numberInStock = numberInStock
+  movieInDb.dailyRentalRate = dailyRentalRate
+  movieInDb.genre = getGenreByName(movie.genreName)
+  if (!movieInDb._id) { movieInDb._id = String(Date.now()) }
+  movies.push(movieInDb)
+  return movieInDb
+}
 
 /**
  * deleteMovie(id)
  * - 전달 받은 id와 일치하는 무비 데이터(객체) 삭제 후, 삭제된 무비(객체) 반환
  */
+const deleteMovie = id => {
+  const movieInDb = getMovies().find(m => m._id === String(id))
+  const index = movies.indexOf(movieInDb)
+  movies.splice(index, 1)
+  return movieInDb
+}
