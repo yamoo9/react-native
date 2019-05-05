@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom'
 
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'font-awesome/css/font-awesome.min.css'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons'
 
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+
+library.add(farHeart, faHeart)
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
