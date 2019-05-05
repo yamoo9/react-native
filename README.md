@@ -2,31 +2,82 @@
 
 JavaScript + React → Native App(iOS, Android) 😍
 
-## React 라이브러리
-
-[React](https://ko.reactjs.org/)는 UI를 구현하는 JavaScript 라이브러리로 현재 전 세계적으로 가장 사용율이 높으며,
-[React Native](https://facebook.github.io/react-native/) 개발의 기본 문법을 제공합니다. React의 특징을 나열하면 다음과 같습니다.
-
-- 선언형(Declarative) 프로그래밍
-- 컴포넌트(Component) 기반 프로그래밍
-- 한 번 배워 어디서나 사용 가능(Learn Once, Write Anywhere) ➪ React Native
-
-### ✏ 학습
-
-[React 러닝 가이드](https://yamoo9.github.io/react-native/guidebook/React.html)를 참고하여 학습을 진행합니다.
-
-1. Create React App
-1. Setting Up
-1. JSX & Virtual DOM
-1. Expression in JSX
-1. Component & Props
-1. State & LifeCycle
-1. Event Handling
-1. Commnication
-1. Form
-
 ### 🤐 학습 자료
 
 React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행합니다.
 
 [react-01.zip](https://github.com/yamoo9/react-native/archive/react-01-ex.zip) 다운로드
+
+<br>
+
+## Movidly 프로젝트
+
+#### Create React App
+
+[yarn](https://yarnpkg.org) 패키지를 사용해 React 프로젝트 **Movidly**를 생성합니다.
+
+```sh
+$ yarn create react-app movidly
+$ cd movidly
+```
+
+#### UI 프레임워크 추가
+
+프로젝트를 신속하게 진행하기 위해 [Bootstrap](https://getbootstrap.com/), [FontAwesome](https://fontawesome.com/)을 프로젝트에 추가합니다.
+
+```sh
+$ yarn add bootstrap font-awesome
+```
+
+#### 설치한 UI 프레임워크 로드
+
+프로젝트 루트 위치에서 `index.js` 파일을 열어 다음 코드를 작성합니다.
+
+```js
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'font-awesome/css/font-awesome.min.css'
+```
+
+#### App 템플릿 작성
+
+[Bootstrap Start Template](https://getbootstrap.com/docs/4.3/examples/starter-template/)을 참고해 `App.jsx` 파일에 JSX를 작성합니다.
+
+```js
+import React from 'react'
+import './App.css'
+
+function App() {
+  return (
+    <main className="container" role="main">
+      <h1>헬로! React</h1>
+    </main>
+  )
+}
+
+export default App
+```
+
+#### 무비, 장르 서비스 추가
+
+모던 JavaScript 실습 과정에서 작성한 services 디렉토리를 프로젝트 루트 위치로 이동시킵니다.
+
+```sh
+.
+├── services/
+│   ├── genreService.js
+│   └── movieService.js
+├── README.md
+├── node_modules/
+├── public/
+├── src/
+├── package.json
+└── yarn.lock
+```
+
+#### 프로젝트 시작
+
+프로젝트를 시작한 후, 정상적으로 UI 프레임워크를 불러왔는지 확인합니다.
+
+```sh
+$ yarn start
+```
