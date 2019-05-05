@@ -7,7 +7,7 @@ JavaScript + React → Native App(iOS, Android) 😍
 React(React Native 포함)는 기본적으로 모던 JavaScript(ECMAScript) 문법을 사용합니다.
 본 과정의 목표인 React Native를 배우기에 앞서 기본 프로그래밍 언어인 JavaScript의 최신 문법을 공부해봅니다.
 
-### 학습
+### ✏ 학습
 
 [React, React Native에서 자주 사용되는 ES6+ 문법](https://yamoo9.github.io/react-native/guidebook/JS_Env.html) 위주로 학습을 진행합니다.
 
@@ -34,3 +34,7 @@ services/
  ├─ movieService.js
  └─ genreService.js
 ```
+
+### 🤐 학습 자료
+
+[js-env.zip](https://github.com/yamoo9/react-native/archive/js-env.zip) 다운로드
