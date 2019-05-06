@@ -1,3 +1,20 @@
 body {
   padding-top: 2rem;
 }
+
+.list-group-item {
+  padding: 0;
+}
+
+.list-group-tab {
+  padding: 0.75rem 1.25rem;
+}
+
+.list-group-tab:focus {
+  position: relative;
+  z-index: 10;
+}
+
+.active .list-group-tab {
+  color: #fff;
+}

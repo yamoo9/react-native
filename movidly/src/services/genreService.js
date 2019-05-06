@@ -18,7 +18,7 @@ const genres = [
  * getGenres()
  * - 모든 장르 데이터(배열)를 반환
  */
-const getGenres = () => genres.slice()
+export const getGenres = () => genres.slice()
 
 /**
  * getGenreByName(name)
