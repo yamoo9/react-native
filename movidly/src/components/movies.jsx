@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
 import { getMovies } from '../services/movieService'
+import { getGenres } from '../services/genreService'
 import { paginate } from '../utils/paginate'
 import LikeButton from './common/LikeButton'
 import Pagination from './common/Pagination'
+import ListGroup from './common/ListGroup'
 
 class Movies extends Component {
   state = {
     movies: [],
+    genres: [],
     currentPage: 1,
     pageSize: 3,
   }
   componentDidMount() {
+    const genres = [{ name: '모든 장르', _id: '*' }, ...getGenres()]
     this.setState({
       movies: getMovies(),
+      genres,
+      selectedGenre: genres[0],
     })
   }
   handleDelete = movie => {
@@ -35,22 +41,51 @@ class Movies extends Component {
       currentPage: page,
     })
   }
-  render() {
-    const { currentPage, pageSize, movies: allMovies } = this.state
-    const { length: count } = this.state.movies
-    const movies = paginate(allMovies, currentPage, pageSize)
+  handleItemSelect = (genre, e) => {
+    e.preventDefault()
+    this.setState({
+      currentPage: 1,
+      selectedGenre: genre,
+    })
+  }
 
-    if (count === 0) {
-      return (
-        <p className="alert alert-warning" role="alert">
-          데이터베이스에 영화 정보가 존재하지 않습니다.
-        </p>
-      )
-    } else {
-      return (
-        <React.Fragment>
-          <p className="alert alert-primary" role="alert">
-            데이터베이스에 존재하는 영화 정보는 <b>{count}</b>개 입니다.
+  render() {
+    const {
+      genres,
+      selectedGenre,
+      currentPage,
+      pageSize,
+      movies: allMovies,
+    } = this.state
+
+    const { length: count } = this.state.movies
+
+    const filteredMovies =
+      selectedGenre && selectedGenre._id !== '*'
+        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
+        : allMovies
+
+    const movies = paginate(filteredMovies, currentPage, pageSize)
+
+    return (
+      <div className="row">
+        <div className="col-3">
+          <ListGroup
+            items={genres}
+            selectedItem={selectedGenre}
+            onItemSelect={this.handleItemSelect}
+          />
+        </div>
+        <div className="col">
+          <p
+            className={
+              filteredMovies.length
+                ? 'alert alert-primary'
+                : 'alert alert-warning'
+            }
+            role="alert">
+            데이터베이스에 존재하는 영화 정보는 <b>{filteredMovies.length}</b>개
+            입니다.
           </p>
           <table className="table">
             <caption className="sr-only">무비 대여/평점 표</caption>
@@ -97,14 +132,14 @@ class Movies extends Component {
             </tbody>
           </table>
           <Pagination
-            itemsCount={count}
+            itemsCount={filteredMovies.length}
             currentPage={currentPage}
             pageSize={pageSize}
             onPageChange={this.handlePageChange}
           />
-        </React.Fragment>
-      )
-    }
+        </div>
+      </div>
+    )
   }
 }
 
