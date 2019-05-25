@@ -14,25 +14,24 @@ React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행�
 
 무비 콘텐츠를 장르별로 필터링 할 수 있도록 기능을 추가해봅니다.
 
+![](assets/genre-filter.png)
+
+<br>
+
 ### 컴포넌트 생성
 
-ListGroup 컴포넌트를 생성한 후, [Bootstrap > ListGroup](https://getbootstrap.com/docs/4.3/components/list-group/) 가이드를 참고하여 리스트 그룹 구조를 작성합니다. 참고로 그룹 안의 각 아이템은 사용자가 클릭 가능한 요소여야 합니다. 그래서 가이드에는 없지만 클릭 가능한 \<a\> 요소를 추가한 후 탭(tab) 역할(role)을 부여합니다. 그리고 스타일 객체를 추가하여 탭 요소를 스타일링 합니다.
+ListGroup 컴포넌트를 생성한 후, [Bootstrap > ListGroup](https://getbootstrap.com/docs/4.3/components/list-group/) 가이드를 참고하여 리스트 그룹 구조를 작성합니다. 참고로 그룹 안의 각 아이템은 사용자가 클릭 가능한 요소여야 합니다. 그래서 가이드에는 없지만 클릭 가능한 \<a\> 요소를 추가한 후 탭(tab) 역할(role)을 부여하고, list-group-tab 클래스 속성을 추가합니다.
 
 ```jsx
 // src/components/common/ListGroup.jsx
 
 import React from 'react'
 
-const styles = {
-  display: 'block',
-  textDecoration: 'none',
-}
-
 const ListGroup = props => {
   return (
     <ul className="list-group">
       <li className="list-group-item">
-        <a style={styles} role="tab" href="" className="list-group-tab">
+        <a role="tab" href="" className="list-group-tab">
           아이템
         </a>
       </li>
@@ -43,10 +42,33 @@ const ListGroup = props => {
 export default ListGroup
 ```
 
+App.css 파일을 열어 리스트 그룹 탭(list-group-tab) 디자인을 추가합니다.
+
+```css
+/* App.css */
+
+.list-group-item {
+  padding: 0;
+}
+
+.list-group-tab {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  text-decoration: none;
+}
+.list-group-tab:hover {
+  text-decoration: inherit;
+}
+
+.active .list-group-tab {
+  color: #fff;
+}
+```
+
 Movies 컴포넌트에서 ListGroup 컴포넌트를 불러온 후, 구조 코드를 수정합니다. [Bootstrap > Grid system](https://getbootstrap.com/docs/4.3/layout/grid/)을 참고하여 레이아웃을 추가합니다. 왼쪽 컬럼에는 ListGroup 컴포넌트를, 반대쪽 컬럼에는 기존 구조 코드를 배치합니다.
 
 ```jsx
-// src/components/Movie.jsx
+// src/components/Movies.jsx
 
 import ListGroup from './common/ListGroup'
 
@@ -69,6 +91,12 @@ class Movies extends Component {
   }
 }
 ```
+
+![](assets/layout.png)
+
+![](assets/list-group-template.png)
+
+<br>
 
 ### 컴포넌트 설계
 
@@ -113,7 +141,7 @@ class Movies extends Component {
 }
 ```
 
-이어서 ListGroup 컴포넌트에 전달 된 속성(props)을 구조 분해 할당 처리한 후, 리스트 렌더링과 이벤트 핸들러를 연결하는 코드를 작성합니다.
+이어서 ListGroup 컴포넌트에 전달 된 속성을 구조 분해 할당 처리한 후, 리스트 렌더링과 이벤트 핸들러를 연결하는 코드를 작성합니다.
 
 ```jsx
 // src/components/common/ListGroup.jsx
@@ -141,6 +169,10 @@ const ListGroup = props => {
 }
 ```
 
+![](assets/list-group-props.png)
+
+<br>
+
 ### 사용자 정의 속성 전달
 
 ListGroup 컴포넌트는 재사용 가능한 공통 컴포넌트로 전달 받은 아이템의 특정 속성(`_id`, `name`)으로 제한하지 않고,
@@ -158,12 +190,7 @@ Movies 컴포넌트에 작성된 ListGroup 요소에 `idProp`, `contentProp` 속
 ```jsx
 // src/components/Movies.jsx
 
-<ListGroup
-  items={genres}
-  onItemSelect={this.handleItemSelect}
-  idProp="_id"
-  contentProp="name"
-/>
+<ListGroup items={genres} onItemSelect={this.handleItemSelect} idProp="_id" contentProp="name" />
 ```
 
 ListGroup 컴포넌트에 전달된 속성 `idProp`, `contentProp` 속성을 `_id`, `name` 속성 대신
@@ -278,6 +305,10 @@ const ListGroup = props => {
 }
 ```
 
+![](assets/list-group-active.png)
+
+<br>
+
 ### 선택된 장르 필터링
 
 선택된 장르가 있을 경우와 그렇지 않은 경우로 구분해 무비 데이터를 필터링 하도록 코드를 작성합니다.
@@ -314,6 +345,10 @@ render() {
 ### 필터링 시, 문제 해결
 
 필터링 기능을 테스트 하다보면 문제를 마주하게 됩니다. 화면에 아이템이 출력되지 않는 현상이 발생합니다.
+
+![](assets/pagination-error.png)
+
+<br>
 
 이유는 페이지네이션 링크가 1개 뿐인 필터링 아이템은 다른 페이지네이션 링크 (예: 2, 3, ...)가 선택된 상태에서
 필터링 되었을 때 현재 페이지(currentPage) 값이 1이 아니기 때문에 화면에 보여지지 않는 것입니다.
