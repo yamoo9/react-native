@@ -19,7 +19,7 @@ movieService 파일의 영화 정보 데이터를 테이블로 렌더링하는 �
 
 ### 컴포넌트 생성
 
-`src/components/movies.jsx` 파일을 생성합니다.
+`src/components/Movies.jsx` 파일을 생성합니다.
 
 ```jsx
 import React, { Component } from 'react'
