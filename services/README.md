@@ -56,7 +56,8 @@ export const getGenreById = id =>
 - 모듈 내보내기(export)
 - 구조 분해 할당(Destructuring)
 - 상수(const)
-- 체이닝 옵션(?.)
+- for...of
+- Object.entries
 - Array.prototype.slice
 - Array.prototype.find
 - Array.prototype.push
@@ -85,7 +86,7 @@ const movies = [ ... ]
  * getMovies()
  * - 모든 무비 데이터(배열 복제) 반환
  */
-export const getMovies = movies.slice()
+export const getMovies = () => movies.slice()
 
 // export function getMovies() {
 //   return movies.slice()
@@ -107,18 +108,37 @@ export const getMovie = id =>
  * --------------------------------------------------------------------
  * 새로운 무비 객체 정보
  * - _id (없을 경우 Date.now() 이용)
- * - name
+ * - title
+ * - subtitle
+ * - link
+ * - image
+ * - pubDate
  * - genre(genreServie.getGenreByName 이용)
  * - numberInStock
  * - dailyRentalRate
+ *
+ * 사용 예시
+   saveMovie({
+     title: "검찰측의 죄인",
+     subtitle: "検察側の罪人, Kensatsu gawa no zainin",
+     link: "https://movie.naver.com/movie/bi/mi/basic.nhn?code=164103",
+     image: "https://movie-phinf.pstatic.net/20190214_183/1550124128940CthGD_JPEG/movie_image.jpg",
+     pubDate: "2018",
+     genreName: "미스터리",
+     numberInStock: 2,
+     dailyRentalRate: 8.7
+   })
  */
-export saveMovie = movie => {
-  const movieInDb = getMovie(movie?._id) || {}
-  const { name, genreName, numberInStock, dailyRentalRate } = movie
-  movieInDb.name = name
-  movieInDb.genre = getGenreByName(genreName)
-  movieInDb.numberInStock = numberInStock
-  movieInDb.dailyRentalRate = dailyRentalRate
+export const saveMovie = movie => {
+  if(!movie) { return null }
+  const movieInDb = getMovies().find(m => m._id === movie._id) || {}
+  for(let [key, value] of Object.entries(m)) {
+    if (key === 'genreName') {
+      movieInDb.genre = getGenreByName(value)
+      continue
+    }
+    movieInDb[key] = value
+  }
   if (!movie._id) { movieInDb._id = String(Date.now()) }
   movies.push(movieInDb)
   return movieInDb
@@ -130,7 +150,7 @@ export saveMovie = movie => {
  * deleteMovie(id)
  * - 전달 받은 id와 일치하는 무비 데이터(객체) 삭제 후, 삭제된 무비(객체) 반환
  */
-export deleteMovie = id => {
+export const deleteMovie = id => {
   const movieInDb = getMovie(id)
   const index = movies.indexOf(movieInDb)
   movies.splice(index, 1)

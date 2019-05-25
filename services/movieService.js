@@ -140,10 +140,26 @@ var movies = [
  * --------------------------------------------------------------------
  * 새로운 무비 객체 정보
  * - _id (없을 경우 Date.now() 이용)
- * - name
+ * - title
+ * - subtitle
+ * - link
+ * - image
+ * - pubDate
  * - genre(genreServie.getGenreByName 이용)
  * - numberInStock
  * - dailyRentalRate
+ *
+ * 사용 예시
+   saveMovie({
+     title: "검찰측의 죄인",
+     subtitle: "検察側の罪人, Kensatsu gawa no zainin",
+     link: "https://movie.naver.com/movie/bi/mi/basic.nhn?code=164103",
+     image: "https://movie-phinf.pstatic.net/20190214_183/1550124128940CthGD_JPEG/movie_image.jpg",
+     pubDate: "2018",
+     genreName: "미스터리",
+     numberInStock: 2,
+     dailyRentalRate: 8.7
+   })
  */
 
 
