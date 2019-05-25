@@ -39,7 +39,11 @@ services/
 
 [es-next.zip](https://github.com/yamoo9/react-native/archive/es-next.zip) 다운로드
 
-# ES6-8 + Stage 1,3
+<br>
+
+![](assets/ES.jpg)
+
+## 목차
 
 - [블록 영역](#블록-영역)
 - [템플릿 리터럴](#템플릿-리터럴)
@@ -61,7 +65,9 @@ services/
 - [비동기 함수](#비동기-함수)
 - [체이닝 옵션](#체이닝-옵션)
 
-## 블록 영역
+<br>
+
+## 블록 영역 [↑](#목차)
 
 ```js
 // ES5
@@ -94,16 +100,16 @@ console.log('initState', initState)
 console.log('state', state)
 ```
 
-## 템플릿 리터럴
+## 템플릿 리터럴 [↑](#목차)
 
 ```js
 // ES5
 var message = ''
 var contents = state.contents
 
-for (var i=0, l=contents.length; i<l; ++i) {
+for (var i = 0, l = contents.length; i < l; ++i) {
   var content = contents[i]
-  message += (i+1) + ': ' + content + ' '
+  message += i + 1 + ': ' + content + ' '
 }
 
 console.log('message = ', message)
@@ -115,16 +121,16 @@ console.log('i = ', i) // 2
 let message = ''
 const contents = state.contents
 
-for (let i=0, l=contents.length; i<l; ++i) {
+for (let i = 0, l = contents.length; i < l; ++i) {
   let content = contents[i]
-  message += `${i+1}: ${content} `
+  message += `${i + 1}: ${content} `
 }
 
 console.log(`message = ${message}`)
 console.log(`i = ${i}`) // Uncaught ReferenceError: i is not defined
 ```
 
-## 태그 템플릿 리터럴
+## 태그 템플릿 리터럴 [↑](#목차)
 
 - [Tagged templates](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates)
 
@@ -143,7 +149,7 @@ styled`
 `
 
 // 함수 래핑
-const styledEl = el => (css) => el.style.cssText = css.join('')
+const styledEl = el => css => (el.style.cssText = css.join(''))
 
 styledEl(document.body)`
   color: #fff;
@@ -153,7 +159,7 @@ styledEl(document.body)`
 `
 ```
 
-## 화살표 함수 & this
+## 화살표 함수 & this [↑](#목차)
 
 ```js
 // ES5
@@ -171,7 +177,7 @@ document.addEventListener('click', handleOnClick)
 // -----------------------------------------------
 
 // ES6
-const square = (x) => {
+const square = x => {
   return x * x
 }
 
@@ -179,20 +185,18 @@ const square = x => {
   return x * x
 }
 
-const square = x => (
-  x * x
-)
+const square = x => x * x
 
 const square = x => x * x
 
 // 화상표 함수의 this
-const handleOnClick = (e) => {
+const handleOnClick = e => {
   console.log('e.target', e.target)
   console.log('this', this)
 }
 ```
 
-## 기본 매개변수
+## 기본 매개변수 [↑](#목차)
 
 ```js
 // ES5
@@ -204,11 +208,10 @@ var el = function(selector, context) {
 // ----------------------------------------
 
 // ES6
-const el = (selector, context=document) =>
-  context.querySelector(selector)
+const el = (selector, context = document) => context.querySelector(selector)
 ```
 
-## 나머지 매개변수
+## 나머지 매개변수 [↑](#목차)
 
 - [Object.assign](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 - [Array.from](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
@@ -217,7 +220,7 @@ const el = (selector, context=document) =>
 // ES5
 function combine() {
   var combined = arguments[0]
-  for(var i=1, o; (o=arguments[i]); ++i) {
+  for (var i = 1, o; (o = arguments[i]); ++i) {
     for (var key in o) {
       if (o.hasOwnProperty(key)) {
         combined[key] = o[key]
@@ -245,7 +248,7 @@ function combine() {
 }
 ```
 
-## 전개(spread) 문법
+## 전개(spread) 문법 [↑](#목차)
 
 ```js
 // ES5
@@ -278,11 +281,10 @@ const combineContents = [...forAll, ...forNative]
 // 객체 병합
 // 후보 (stage 3: candidate)
 // React, React Native에서 사용할 수 있음
-const newState = {...state, newContent: 'react router'}
-
+const newState = { ...state, newContent: 'react router' }
 ```
 
-## String 인스턴스 메서드
+## String 인스턴스 메서드 [↑](#목차)
 
 - [String.prototype.includes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
 - [String.prototype.startsWith](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
@@ -298,7 +300,7 @@ const poem = {
     지붕이랑 길이랑 밭이랑 추워한다고
     덮어주는 이불인가봐
     그러기에 추운 겨울에만 내리지
-  `
+  `,
 }
 
 let poet
@@ -316,12 +318,12 @@ if (poem.snow.trim().endsWith('겨울에만 내리지')) {
   console.log('이 시는 "겨울에만 내리지"로 끝맺습니다.')
 }
 
-if(poet === '윤동주') {
+if (poet === '윤동주') {
   console.log(`윤동주 시인의 글을 3번 되내어 읽어 보겠습니다. \n${poem.snow.repeat(3)}`)
 }
 ```
 
-## Array 인스턴스 메서드
+## Array 인스턴스 메서드 [↑](#목차)
 
 - [Array.prototype.find](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
 - [Array.prototype.findIndex](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
@@ -341,7 +343,7 @@ if (reactFramework.includes(item)) {
 }
 ```
 
-## Object 클래스 메서드
+## Object 클래스 메서드 [↑](#목차)
 
 - [Object.entries](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
 - [Object.keys](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
@@ -364,7 +366,7 @@ for (let [key, value] of Object.entries(state)) {
 }
 ```
 
-## 클래스 문법
+## 클래스 문법 [↑](#목차)
 
 ```js
 // ES5
@@ -410,7 +412,7 @@ class App extends Root {
 const app = new App()
 ```
 
-## 구조 분해 할당
+## 구조 분해 할당 [↑](#목차)
 
 ```js
 // ES5
@@ -435,11 +437,11 @@ const state = {
 const { newContent: reactNative, contents } = state
 const { contents, ...rest } = state
 
-const [ , redux, reactRouter ] = contents
-const [ react, ...reactFamilies ] = contents
+const [, redux, reactRouter] = contents
+const [react, ...reactFamilies] = contents
 ```
 
-## for...of
+## for...of [↑](#목차)
 
 ```js
 // ES5
@@ -449,7 +451,7 @@ var state = {
   contents: ['react', 'redux', 'react router'],
 }
 
-state.contents.forEach(function(item,index){
+state.contents.forEach(function(item, index) {
   console.log(index, item)
 })
 
@@ -472,7 +474,7 @@ for (let [index, item] of state.contents.entries()) {
 }
 ```
 
-## 모듈
+## 모듈 [↑](#목차)
 
 ```js
 // ES5
@@ -493,7 +495,7 @@ export default () => { ... }
 export * from './utils'
 ```
 
-## 계산된 속성
+## 계산된 속성 [↑](#목차)
 
 ```js
 // ES5
@@ -502,17 +504,16 @@ export * from './utils'
 // ----------------------------------------
 
 // ES6
-let key = 'unigue';
+let key = 'unigue'
 
-const o = {[key]: 90123}
+const o = { [key]: 90123 }
 console.log(o.unique) // 90123
-
 
 let { [key]: one } = { unique: 'identity' }
 console.log(one) // 'identity'
 ```
 
-## 향상된 객체 표기 법
+## 향상된 객체 표기 법 [↑](#목차)
 
 ```js
 // ES5
@@ -525,7 +526,7 @@ var obj = {
   state: state,
   getContentByIndex: function(index) {
     return this.state.contents[index]
-  }
+  },
 }
 
 // ----------------------------------------
@@ -545,11 +546,11 @@ const obj = {
   // this 참조가 객체가 아님
   usingArrowFn: () => {
     console.log(this) // 상위 객체 참조
-  }
+  },
 }
 ```
 
-## 후행 쉼표
+## 후행 쉼표 [↑](#목차)
 
 ```js
 // ES5
@@ -558,16 +559,12 @@ const obj = {
 // ----------------------------------------
 
 // ES6
-const trailingComma = (instructor, message, ) =>
-  `${instructor}! ${message} 하자!!`
+const trailingComma = (instructor, message) => `${instructor}! ${message} 하자!!`
 
-trailingComma(
-  '야무',
-  '후회없는 강의',
-)
+trailingComma('야무', '후회없는 강의')
 ```
 
-## 비동기 함수
+## 비동기 함수 [↑](#목차)
 
 ```js
 // ES5
@@ -579,7 +576,7 @@ function usingXMLHttpRequest(api) {
     if (xhr.status === 200 && xhr.readyState === 4) {
       var jsonStringToObject = JSON.parse(xhr.response)
       var data = jsonStringToObject.data
-      for (var i=0, l=data.length; i<l; ++i) {
+      for (var i = 0, l = data.length; i < l; ++i) {
         var item = data[i]
         console.log(item)
       }
@@ -599,7 +596,7 @@ const usingPromise = api => {
     .then(response => response.json())
     .then(json => json.data)
     .then(data => {
-      for(let item of data) {
+      for (let item of data) {
         console.log(item)
       }
     })
@@ -612,14 +609,14 @@ usingPromise('//api.myjson.com/bins/htzry')
 
 // ES8
 // 비동기 함수(식) 활용
-const usingAsync = async (api) => {
+const usingAsync = async api => {
   try {
     const response = await fetch(api)
     const json = await response.json()
-    for(let item of json.data) {
+    for (let item of json.data) {
       console.log(item)
     }
-  } catch(error) {
+  } catch (error) {
     console.log(error.message)
   }
 }
@@ -632,7 +629,7 @@ usingAsync('//api.myjson.com/bins/htzry')
 // }
 ```
 
-## 체이닝 옵션
+## 체이닝 옵션 [↑](#목차)
 
 ```js
 // ES5
@@ -650,4 +647,3 @@ let y = a?.[x]
 let z = a?.b()
 let v = a?.()
 ```
-
