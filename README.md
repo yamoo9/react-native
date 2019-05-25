@@ -14,6 +14,8 @@ React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행�
 
 무비 데이터베이스가 많아질 경우, UI에 페이지네이션이 추기되도록 구성해보겠습니다.
 
+![](assets/pagination.png)
+
 ### 컴포넌트 생성
 
 Pagination 컴포넌트를 생성한 후, [Bootstrap > Pagination](https://getbootstrap.com/docs/4.3/components/pagination/) 가이드를 참고하여 페이지네이션 구조를 작성합니다.
@@ -41,7 +43,7 @@ export default Pagination
 ```
 
 ```jsx
-// src/components/Movie.jsx
+// src/components/Movies.jsx
 
 import Pagination from './common/Pagination'
 
@@ -58,10 +60,12 @@ Pagination 컴포넌트는 다음의 속성을 전달 받아 처리합니다.
 
 | 속성         | 설명                                          |
 | ------------ | --------------------------------------------- |
-| itemsCount   | 무비 정보 아이템 개수                         |
-| pageSize     | 한 화면에 보여줄 페이지 개수                  |
+| itemsCount   | 무비 정보 아이템의 총 개수                         |
+| pageSize     | 한 화면에 보여 줄 페이지 개수                  |
 | currentPage  | 현재 페이지 번호                              |
-| onPageChange | 클릭 시, 페이지를 변경할 커스텀 이벤트 핸들러 |
+| onPageChange | 클릭 시, 페이지를 변경할 커스텀 이벤트 핸들러(메서드) |
+
+<br>
 
 Movies 컴포넌트의 \<Pagination \/> 요소에 각 속성을 추가하고, 필요한 상태 및 메서드를 추가합니다.
 
@@ -83,9 +87,13 @@ class Movies extends Component {
     const { length: count } = this.state.movies
     return (
       <Pagination
+        // 무비 정보 총 개수
         itemsCount={count}
+        // 화면에 보여질 개수
         pageSize={pageSize}
+        // 현재 페이지 번호
         currentPage={currentPage}
+        // 클릭 이벤트에 연결할 메서드
         onPageChange={this.handlePageChange}
       />
     )
@@ -93,15 +101,42 @@ class Movies extends Component {
 }
 ```
 
+### 페이지네이션 개수
+
 이어서 Pagination 컴포넌트에 전달된 속성을 처리합니다. Pagination 컴포넌트는 전달된 속성을 통해 화면에 출력할 페이지 개수를 계산해야 합니다.
-계산 처리를 손쉽게 처리하기 위해 [Lodash](https://lodash.com/) 라이브러리를 설치합니다.
+
+![](assets/pagination.png)
+
+#### Lodash 라이브러리 활용
+
+손쉬운 배열 데이터 관리를 위해 [Lodash](https://lodash.com/) 라이브러리를 설치합니다.
 
 ```sh
 $ yarn add lodash
 ```
 
-전달 받은 속성을 계산하여 페이지네이션 개수(pageCount)를 구합니다. (올림 함수 사용)
-그리고 [\_.range()](https://lodash.com/docs/4.17.11#range) 메서드를 활용해 pages 배열을 생성하여 리스트 렌더링 처리합니다.
+전달 받은 속성을 계산하여 페이지네이션 개수(pageCount)를 구합니다.
+
+> **페이지네이션 개수 설정**<br>
+> —————————————————————————————<br>
+> 페이지네이션 개수 = 올림(총 아이템 개수 ÷ 화면에 출력할 페이지 개수)<br>
+> 총 9개를 3개씩 보여주면? `9 ÷ 3 = 3`<br>
+> 총 9개를 5개씩 보여주면? `9 ÷ 5 = 올림(1.8) = 2`<br>
+> `const pageCount = Math.ceil(itemCount / pageSize)`
+
+### 페이지 링크 배열
+
+페이지네이션 개수를 구한 후, [\_.range()](https://lodash.com/docs/4.17.11#range) 메서드를 활용해 pages 배열을 생성하여 리스트 렌더링 처리합니다.
+
+> **페이지 링크 배열 설정**<br>
+> —————————————————————————————<br>
+> 총 9개를 3개씩 보여주면? `[1,2,3]`<br>
+> 총 9개를 5개씩 보여주면? `[1,2,3,4,5]`<br>
+> `const pages = _.range(1, pageCount + 1)`
+
+<br>
+
+Pagination 컴포넌트에 페이지네이션 개수, 페이지 링크 배열 생성 코드를 반영합니다.
 
 ```jsx
 // src/components/common/Pagination.jsx
@@ -120,11 +155,13 @@ const Pagination = props => {
   return (
     <nav>
       <ul className="pagination">
+        {/* pages 페이지 링크 배열 리스트 렌더링 */}
         {pages.map(page => (
           <li key={page} className="page-item">
             <a
               href=""
               className="page-link"
+              // 클릭 이벤트(페이지 번호 전달)
               onClick={e => onPageChange(page, e)}>
               {page}
             </a>
@@ -172,6 +209,7 @@ const Pagination = props => {
           <li key={page} className={activeClass(page)}>
             <a
               href=""
+              role="tab"
               className="page-link"
               onClick={e => onPageChange(page, e)}>
               {page}
@@ -184,16 +222,35 @@ const Pagination = props => {
 }
 ```
 
+<br>
+
+### 페이지 필터링
+
+화면에 보여 줄 개수만큼 영화 정보 리스트를 필터링 설정해봅니다.
+
+![](assets/page-filtering.png)
+
 ### paginate 유틸리티
 
 한 화면에 보여질 페이지 개수를 처리하는 `paginate()` 유틸리티 함수를 작성합니다.
-`paginate()` 함수는 다음의 매개변수를 전달 받습니다.
+`paginate()` 함수는 다음의 매개변수를 전달 받습니다. `paginate(items, pageNumber, pageSize)`
 
 | 매개변수   | 설명                         |
 | ---------- | ---------------------------- |
-| items      | 아이템 집합                  |
+| items      | 아이템 리스트(배열)                  |
 | pageNumber | 현재 페이지 번호             |
 | pageSize   | 한 화면에 뿌려질 페이지 개수 |
+
+<br>
+
+> **아이템 리스트 필터링 & 시작 인덱스 설정**<br>
+> ———————————————————————————————————<br>
+> 총 9개를 1페이지에서 3개씩 보여주면? (1 - 1) × 3 = 0 ➪ `[{id:1, ...},{id:2, ...},{id:3, ...}]`<br>
+> 총 9개를 2페이지에서 3개씩 보여주면? (2 - 1) × 3 = 3 ➪  `[{id:4, ...},{id:5, ...},{id:6, ...}]`<br>
+> 보여 줄 아이템의 시작 번호 = (현재 페이지 번호 - 1) * 보여 줄 아이템 개수<br>
+> `const startIndex = (pageNumber - 1) * pageSize`
+
+<br>
 
 현재 페이지 번호의 시작 인덱스부터 한 화면에 보여질 페이지 개수 만큼
 데이터를 계산하여 반환하기 위해 Lodash 라이브러리의 [\_.slice()](https://lodash.com/docs/4.17.11#slice), [\_.take()](https://lodash.com/docs/4.17.11#take) 메서드를 사용합니다.
@@ -202,6 +259,31 @@ const Pagination = props => {
 | ---------- | ------------------------------------------------------------- |
 | \_.slice() | 배열 데이터 중 일부를 잘라 새로운 배열을 반환합니다.          |
 | \_.take()  | 배열 데이터 중 전달된 개수만큼 잘라 새로운 배열을 반환합니다. |
+
+
+<br>
+
+> **※ 참고: Lodash 라이브러리 메서드 대신 `.slice` 메서드를 사용해도 무방합니다.**<br>
+>
+> ```js
+> // Lodash
+> _(아이템_배열).slice(시작_인덱스).take(보여질_페이지_개수).value()
+>
+> // ⬇︎
+>
+> // Array.prototype.slice
+> 아이템_배열.slice(시작_인덱스, (시작_인덱스 + 보여질_페이지_개수))
+>
+> // 예시
+> const list = [1, 2, 3, 4, 5, 6]
+> let pageSize = 3
+> let currentPage = 2
+> let startIndex = (currentPage - 1) * pageSize // 3
+> list.slice(startIndex, startIndex + pageSize) // 3 ~ 6
+> // 결과: [4, 5, 6]
+> ```
+
+<br>
 
 먼저 시작 인덱스는 페이지 번호에서 1을 뺀 후, 한 화면에 보여질 페이지 개수를 곱해 계산합니다.
 
@@ -223,13 +305,13 @@ export const paginate = (items, pageNumber, pageSize) => {
 }
 ```
 
-### 한 화면에 뿌려질 페이지 처리
+### Movies 컴포넌트 > 화면에 보여질 아이템 처리
 
 현재 페이지 번호를 시작으로 하여 페이지 개수 만큼 화면에 그리기 위해
 `paginate()` 유틸리 함수를 불러온 후 계산된 값을 `movies` 상수에 할당 받아 처리되도록 코드를 작성합니다.
 
 ```jsx
-// src/components/Movie.jsx
+// src/components/Movies.jsx
 
 // paginate() 유틸리티 함수 불러오기
 import { paginate } from '../utils/paginate'
@@ -254,6 +336,8 @@ class Movies extends Component {
   }
 }
 ```
+
+![](assets/page-filtering2.png)
 
 ### 전달 속성 유효성 검사
 
@@ -300,10 +384,12 @@ Pagination.propTypes = {
 
 브라우저 Console 패널에 출력되는 오류 메시지를 살펴보면 전달된 속성의 타입에 문제가 있음을 알려줍니다.
 
-```
+![](assets/prop-types-error.png)
+
+<!-- ```
 Warning: Failed prop type: Invalid prop `pageSize` of type `string` supplied to `Pagination`, expected `number`.
     in Pagination (at Movies.jsx:99)
     in Movies (at App.jsx:9)
     in main (at App.jsx:8)
     in App (at src/index.js:16)
-```
+``` -->
