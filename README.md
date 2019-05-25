@@ -39,6 +39,27 @@ services/
 
 [es-next.zip](https://github.com/yamoo9/react-native/archive/es-next.zip) 다운로드
 
+# ES6-8 + Stage 1,3
+
+- [블록 영역](#블록-영역)
+- [템플릿 리터럴](#템플릿-리터럴)
+- [화살표 함수 & this](#화살표-함수--this)
+- [기본 매개변수](#기본-매개변수)
+- [나머지 매개변수](#나머지-매개변수)
+- [전개(spread) 문법](#전개spread-문법)
+- [String 인스턴스 메서드](#String-인스턴스-메서드)
+- [Array 인스턴스 메서드](#Array-인스턴스-메서드)
+- [Object 클래스 메서드](#Object-클래스-메서드)
+- [클래스 문법](#클래스-문법)
+- [구조 분해 할당](#구조-분해-할당)
+- [for...of](#for...of)
+- [모듈](#모듈)
+- [계산된 속성](#계산된-속성)
+- [향상된 객체 표기 법](#향상된-객체-표기-법)
+- [후행 쉼표](#후행-쉼표)
+- [비동기 함수](#비동기-함수)
+- [체이닝 옵션](#체이닝-옵션)
+
 ## 블록 영역
 
 ```js
@@ -159,8 +180,8 @@ const el = (selector, context=document) =>
 
 ## 나머지 매개변수
 
-- Object.assign
-- Array.from
+- [Object.assign](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+- [Array.from](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/from)
 
 ```js
 // ES5
@@ -233,10 +254,10 @@ const newState = {...state, newContent: 'react router'}
 
 ## String 인스턴스 메서드
 
-- String.prototype.includes
-- String.prototype.startsWith
-- String.prototype.endsWith
-- String.prototype.repeat
+- [String.prototype.includes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/includes)
+- [String.prototype.startsWith](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
+- [String.prototype.endsWith](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith)
+- [String.prototype.repeat](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/repeat)
 
 ```js
 // ES6
@@ -272,9 +293,9 @@ if(poet === '윤동주') {
 
 ## Array 인스턴스 메서드
 
-- Array.prototype.find
-- Array.prototype.findIndex
-- Array.prototype.includes
+- [Array.prototype.find](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/find)
+- [Array.prototype.findIndex](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex)
+- [Array.prototype.includes](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/includes)
 
 ```js
 // ES6
@@ -290,11 +311,11 @@ if (reactFramework.includes(item)) {
 }
 ```
 
-## Object 클래스(스태틱) 메서드
+## Object 클래스 메서드
 
-- Object.entries
-- Object.keys
-- Object.values
+- [Object.entries](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/entries)
+- [Object.keys](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
+- [Object.values](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Object/values)
 
 ```js
 // ES6
