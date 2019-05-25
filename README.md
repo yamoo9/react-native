@@ -18,6 +18,12 @@ React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행�
 
 [Bootstrap → Alerts](https://getbootstrap.com/docs/4.3/components/alerts/) 가이드를 참고하여 사용자에게 알림 정보를 제공해봅니다.
 
+영화 정보 개수 화면 표시
+![](assets/alert-info.png)
+
+영화 정보 개수가 0일 경우 화면 표시
+![](assets/alert-danger.png)
+
 ```jsx
 render() {
   const { length: count } = this.state.movies
@@ -49,6 +55,8 @@ body {
 ### Like 버튼
 
 테이블에 사용자가 '좋아요(Like)'를 선택할 수 있는 아이콘 버튼을 추가해봅니다.
+
+![](assets/like-button.png)
 
 #### React FontAwesome 모듈
 
