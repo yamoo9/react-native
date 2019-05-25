@@ -1,33 +1,55 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+import { paginate } from '../utils/paginate'
+
 import { getMovies } from '../services/movieService'
 import { getGenres } from '../services/genreService'
-import { paginate } from '../utils/paginate'
+
 import LikeButton from './common/LikeButton'
 import Pagination from './common/Pagination'
 import ListGroup from './common/ListGroup'
 
-class Movies extends Component {
+const styles = {
+  poster: {
+    maxWidth: 80,
+    height: 'auto',
+    marginRight: 10,
+  },
+}
+
+export default class Movies extends Component {
   state = {
     movies: [],
     genres: [],
+    selectedGenre: null,
     currentPage: 1,
-    pageSize: 3,
+    pageSize: 4,
   }
+
   componentDidMount() {
-    const genres = [{ name: '모든 장르', _id: '*' }, ...getGenres()]
+    const allGenre = { _id: '*', name: '모든 장르' }
+    const genres = [allGenre, ...getGenres()]
     this.setState({
       movies: getMovies(),
       genres,
-      selectedGenre: genres[0],
+      selectedGenre: allGenre,
     })
   }
-  handleDelete = movie => {
-    const movies = this.state.movies.filter(m => m._id !== movie._id)
+
+  handleItemSelect = (genre, e) => {
+    e.preventDefault()
     this.setState({
-      movies,
+      selectedGenre: genre,
+      currentPage: 1,
     })
   }
-  handleLike = movie => {
+
+  handleRemove = id => {
+    this.setState({
+      movies: this.state.movies.filter(movie => movie._id !== id),
+    })
+  }
+
+  handleToggleLike = movie => {
     const movies = this.state.movies.slice()
     const index = movies.indexOf(movie)
     movies[index].like = !movies[index].like
@@ -35,112 +57,113 @@ class Movies extends Component {
       movies,
     })
   }
+
   handlePageChange = (page, e) => {
-    e.preventDefault()
     this.setState({
       currentPage: page,
     })
-  }
-  handleItemSelect = (genre, e) => {
     e.preventDefault()
-    this.setState({
-      currentPage: 1,
-      selectedGenre: genre,
-    })
   }
 
   render() {
-    const {
-      genres,
-      selectedGenre,
-      currentPage,
-      pageSize,
-      movies: allMovies,
-    } = this.state
-
-    const { length: count } = this.state.movies
+    const { genres, selectedGenre, movies: allMovies, pageSize, currentPage } = this.state
+    // const { length: count } = allMovies
 
     const filteredMovies =
       selectedGenre && selectedGenre._id !== '*'
-        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
+        ? allMovies.filter(m => m.genre.name === selectedGenre.name)
         : allMovies
-
     const movies = paginate(filteredMovies, currentPage, pageSize)
+    const count = filteredMovies.length
 
-    return (
-      <div className="row">
-        <div className="col-3">
-          <ListGroup
-            items={genres}
-            selectedItem={selectedGenre}
-            onItemSelect={this.handleItemSelect}
-          />
+    if (count === 0) {
+      return (
+        <div className="alert alert-danger" role="alert">
+          데이터베이스에 영화정보가 {count}개 입니다.
         </div>
-        <div className="col">
-          <p
-            className={
-              filteredMovies.length
-                ? 'alert alert-primary'
-                : 'alert alert-warning'
-            }
-            role="alert">
-            데이터베이스에 존재하는 영화 정보는 <b>{filteredMovies.length}</b>개
-            입니다.
-          </p>
-          <table className="table">
-            <caption className="sr-only">무비 대여/평점 표</caption>
-            <thead>
-              <tr>
-                <th scope="col">이름</th>
-                <th scope="col">장르</th>
-                <th scope="col">재고</th>
-                <th scope="col">평점</th>
-                <th scope="col">좋아요</th>
-                <th scope="col">삭제</th>
-              </tr>
-            </thead>
-            <tbody>
-              {movies.map(movie => (
-                <tr key={movie._id}>
-                  <td>
-                    <img
-                      className="img-thumbnail float-left"
-                      src={movie.image}
-                      style={{ maxWidth: 80, marginRight: 10 }}
-                      alt=""
-                    />
-                    {movie.title}
-                  </td>
-                  <td>{movie.genre.name}</td>
-                  <td>{movie.numberInStock}</td>
-                  <td>{movie.dailyRentalRate}</td>
-                  <td>
-                    <LikeButton
-                      liked={movie.like}
-                      onToogleLike={e => this.handleLike(movie)}
-                    />
-                  </td>
-                  <td>
-                    <button
-                      onClick={e => this.handleDelete(movie)}
-                      className="btn btn-dark btn-sm">
-                      제거
-                    </button>
-                  </td>
+      )
+    } else {
+      return (
+        <div className="row">
+          <div className="col-lg col-lg-3">
+            <ListGroup
+              items={genres}
+              selectedItem={selectedGenre}
+              onItemSelect={this.handleItemSelect}
+              idProp="_id"
+            />
+          </div>
+          <div className="col">
+            <div className="alert alert-primary" role="alert">
+              데이터베이스에 영화 정보가 {count}개 입니다.
+            </div>
+            <table className="table">
+              <caption className="sr-only">무비 대여/평점 표</caption>
+              <colgroup>
+                <col width="40%" />
+                <col width="15%" />
+                <col width="15%" />
+                <col width="7%" />
+                <col width="7%" />
+                <col width="16%" />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th scope="col">이름</th>
+                  <th scope="col">장르</th>
+                  <th scope="col">재고</th>
+                  <th scope="col">평점</th>
+                  <th />
+                  <th />
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <Pagination
-            itemsCount={filteredMovies.length}
-            currentPage={currentPage}
-            pageSize={pageSize}
-            onPageChange={this.handlePageChange}
-          />
+              </thead>
+              <tbody>
+                {movies.map(movie => (
+                  <tr key={movie._id}>
+                    <td>
+                      <img
+                        className="img-thunbnail float-left"
+                        src={movie.image}
+                        style={styles.poster}
+                        width="80"
+                        height="113"
+                        alt=""
+                      />
+                      <a href={movie.link} target="_blank" rel="noreferrer">
+                        {movie.title}
+                      </a>
+                    </td>
+                    <td>{movie.genre.name}</td>
+                    <td>{movie.numberInStock}</td>
+                    <td>{movie.dailyRentalRate}</td>
+                    <td>
+                      <LikeButton
+                        liked={movie.like}
+                        onToggle={() => this.handleToggleLike(movie)}
+                      />
+                    </td>
+                    <td>
+                      <button
+                        onClick={() => this.handleRemove(movie._id)}
+                        type="button"
+                        className="btn btn-dark btn-sm">
+                        제거
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <Pagination
+              itemsCount={count}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              onPageChange={this.handlePageChange}
+            />
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
-
-export default Movies

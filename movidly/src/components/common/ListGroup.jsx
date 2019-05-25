@@ -1,37 +1,26 @@
 import React from 'react'
 
-const styles = {
-  display: 'block',
-  textDecoration: 'none',
-}
-
-const ListGroup = props => {
-  const { items, selectedItem, onItemSelect, contentProp, idProp } = props
-
+const ListGroup = ({ items, selectedItem, onItemSelect, idProp, contentProp }) => {
   const activeClass = item => {
-    return selectedItem === item ? 'list-group-item active' : 'list-group-item'
+    return selectedItem[idProp] === item[idProp] ? 'active' : ''
   }
-
   return (
-    <ul className="list-group">
-      {items.map(item => (
-        <li key={item[idProp]} className={activeClass(item)}>
-          <a
-            style={styles}
-            role="tab"
-            href=""
-            className="list-group-tab"
-            onClick={e => onItemSelect(item, e)}>
-            {item[contentProp]}
-          </a>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="list-group">
+        {items.map((item, i) => (
+          <li key={item[idProp]} className={`list-group-item ${activeClass(item)}`}>
+            <a className="list-group-tab" role="tab" href="" onClick={e => onItemSelect(item, e)}>
+              {item[contentProp]}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
   )
 }
 
 ListGroup.defaultProps = {
-  idProp: '_id',
+  idProp: 'id',
   contentProp: 'name',
 }
 
