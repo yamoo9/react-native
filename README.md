@@ -21,14 +21,17 @@ React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행�
 
 ### ✏ 학습
 
-[React 러닝 가이드](https://yamoo9.github.io/react-native/guidebook/React.html)를 참고하여 학습을 진행합니다.
+[React 러닝 가이드](https://yamoo9.github.io/react-native/guidebook/r-react.html)를 참고하여 학습을 진행합니다.
 
-1. Create React App
-1. Setting Up
-1. JSX & Virtual DOM
-1. Expression in JSX
-1. Component & Props
-1. State & LifeCycle
-1. Event Handling
-1. Commnication
-1. Form
+1. React 라이브러리
+1. React 시작하기
+1. 개발도구 확장
+1. JSX ➪ React 요소
+1. JSX 활용
+1. 컴포넌트 & props
+1. state & 라이프 사이클
+1. 이벤트 핸들링
+1. 컴포넌트 통신
+1. props 검사
+1. 폼 컨트롤
+1. 고차(HO) 컴포넌트
