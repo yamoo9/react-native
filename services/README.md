@@ -26,6 +26,10 @@ const genres = [
  * - 모든 장르 데이터(배열)를 반환
  */
 export const getGenres = () => [...genres]
+
+// export function getGenres() {
+//   return genres.slice()
+// }
 ```
 
 ## getGenreByName()
@@ -87,10 +91,6 @@ const movies = [ ... ]
  * - 모든 무비 데이터(배열 복제) 반환
  */
 export const getMovies = () => movies.slice()
-
-// export function getMovies() {
-//   return movies.slice()
-// }
 ```
 ```js
 /**

@@ -159,6 +159,9 @@ const el = (selector, context=document) =>
 
 ## 나머지 매개변수
 
+- Object.assign
+- Array.from
+
 ```js
 // ES5
 function combine() {
@@ -176,7 +179,16 @@ function combine() {
 // -----------------------------------------
 
 // ES6
+// Object.assign, 나머지 매개변수 활용
 function combine(combined, ...args) {
+  args.forEach(o => Object.assign(combined, o))
+  return combined
+}
+
+// Array.from 활용
+function combine() {
+  const args = Array.from(arguments)
+  const combined = args.shift()
   args.forEach(o => Object.assign(combined, o))
   return combined
 }
@@ -213,8 +225,92 @@ const state = {
 const combineContents = [...forAll, ...forNative]
 
 // 객체 병합
+// 후보 (stage 3: candidate)
+// React, React Native에서 사용할 수 있음
 const newState = {...state, newContent: 'react router'}
 
+```
+
+## String 인스턴스 메서드
+
+- String.prototype.includes
+- String.prototype.startsWith
+- String.prototype.endsWith
+- String.prototype.repeat
+
+```js
+// ES6
+
+const poem = {
+  snow: `
+    지난밤에 눈이 소오복히 왔네
+    지붕이랑 길이랑 밭이랑 추워한다고
+    덮어주는 이불인가봐
+    그러기에 추운 겨울에만 내리지
+  `
+}
+
+let poet
+
+if (poem.snow.includes('눈이 소오복히 왔네')) {
+  console.log('이 시는 "윤동주" 작가님의 "눈" 입니다.')
+  poet = '윤동주'
+}
+
+if (poem.snow.trim().startsWith('지난밤에')) {
+  console.log('이 시는 "지난밤에"라는 과거 형으로 시작합니다.')
+}
+
+if (poem.snow.trim().endsWith('겨울에만 내리지')) {
+  console.log('이 시는 "겨울에만 내리지"로 끝맺습니다.')
+}
+
+if(poet === '윤동주') {
+  console.log(`윤동주 시인의 글을 3번 되내어 읽어 보겠습니다. \n${poem.snow.repeat(3)}`)
+}
+```
+
+## Array 인스턴스 메서드
+
+- Array.prototype.find
+- Array.prototype.findIndex
+- Array.prototype.includes
+
+```js
+// ES6
+const reactFramework = 'react redux react-native react-navigation'.split(' ')
+
+reactFramework.find(item => item === 'redux')
+reactFramework.findIndex(item => item === 'react-native')
+
+// ES7
+let item = 'react-navigation'
+if (reactFramework.includes(item)) {
+  console.info(`reactFramework 배열 안에는 ${item} 아이템이 포함되어 있습니다.`)
+}
+```
+
+## Object 클래스(스태틱) 메서드
+
+- Object.entries
+- Object.keys
+- Object.values
+
+```js
+// ES6
+const state = {
+  newContent: 'react native',
+  contents: ['react', 'redux', 'react router'],
+}
+
+Object.entries(state)
+Object.keys(state)
+Object.values(state)
+
+for (let [key, value] of Object.entries(state)) {
+  console.log(key)
+  console.log(value)
+}
 ```
 
 ## 클래스 문법
@@ -318,6 +414,7 @@ const state = {
 for (let item of state.contents) {
   console.log(item)
 }
+
 // 인덱스도 함께 출력
 for (let [index, item] of state.contents.entries()) {
   console.log(index, item)
@@ -400,3 +497,106 @@ const obj = {
   }
 }
 ```
+
+## 후행 쉼표
+
+```js
+// ES5
+// 후행 쉼표 없음
+
+// ----------------------------------------
+
+// ES6
+const trailingComma = (instructor, message, ) =>
+  `${instructor}! ${message} 하자!!`
+
+trailingComma(
+  '야무',
+  '후회없는 강의',
+)
+```
+
+## 비동기 함수
+
+```js
+// ES5
+// Promise, 비동기 함수 없음
+function usingXMLHttpRequest(api) {
+  var xhr = new XMLHttpRequest()
+  xhr.open('GET', api)
+  xhr.onreadystatechange = function() {
+    if (xhr.status === 200 && xhr.readyState === 4) {
+      var jsonStringToObject = JSON.parse(xhr.response)
+      var data = jsonStringToObject.data
+      for (var i=0, l=data.length; i<l; ++i) {
+        var item = data[i]
+        console.log(item)
+      }
+    }
+  }
+  xhr.send()
+}
+
+usingXMLHttpRequest('//api.myjson.com/bins/htzry')
+
+// ------------------------------------------------
+
+// ES6
+// Promise 활용
+const usingPromise = api => {
+  fetch(api)
+    .then(response => response.json())
+    .then(json => json.data)
+    .then(data => {
+      for(let item of data) {
+        console.log(item)
+      }
+    })
+    .catch(error => console.error(error.message))
+}
+
+usingPromise('//api.myjson.com/bins/htzry')
+
+// ------------------------------------------------
+
+// ES8
+// 비동기 함수(식) 활용
+const usingAsync = async (api) => {
+  try {
+    const response = await fetch(api)
+    const json = await response.json()
+    for(let item of json.data) {
+      console.log(item)
+    }
+  } catch(error) {
+    console.log(error.message)
+  }
+}
+
+usingAsync('//api.myjson.com/bins/htzry')
+
+// 비동기 함수(선언)
+// async function usingAsync() {
+//   ...
+// }
+```
+
+## 체이닝 옵션
+
+```js
+// ES5
+var c = a == null ? undefined : a.b
+var y = a == null ? undefined : a[x]
+var z = a == null ? undefined : a.b()
+var v = a == null ? undefined : a()
+
+// ------------------------------------------------
+
+// 체이닝 옵션
+// 제안 (stage 1: proposal)
+let c = a?.b
+let y = a?.[x]
+let z = a?.b()
+let v = a?.()
+```
+
