@@ -52,7 +52,7 @@ services/
 - [Object 클래스 메서드](#Object-클래스-메서드)
 - [클래스 문법](#클래스-문법)
 - [구조 분해 할당](#구조-분해-할당)
-- [for...of](#for...of)
+- [for...of](#forof)
 - [모듈](#모듈)
 - [계산된 속성](#계산된-속성)
 - [향상된 객체 표기 법](#향상된-객체-표기-법)
@@ -121,6 +121,35 @@ for (let i=0, l=contents.length; i<l; ++i) {
 
 console.log(`message = ${message}`)
 console.log(`i = ${i}`) // Uncaught ReferenceError: i is not defined
+```
+
+## 태그 템플릿 리터럴
+
+- [Tagged templates](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates)
+
+```js
+// ES6
+const styled = (css, el) => {
+  el.style.cssText = css.join('')
+}
+
+styled`
+  ${document.body}
+  color: #fff;
+  background: #323232;
+  margin: 0;
+  padding: 1.4rem;
+`
+
+// 함수 래핑
+const styledEl = el => (css) => el.style.cssText = css.join('')
+
+styledEl(document.body)`
+  color: #fff;
+  background: #323232;
+  margin: 0;
+  padding: 1.4rem;
+`
 ```
 
 ## 화살표 함수 & this
