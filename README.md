@@ -12,6 +12,37 @@ React 애플리케이션 학습 자료를 다운로드 받아 실습을 진행�
 
 ## Movidly 프로젝트
 
+React 라이브러리를 활용해 영화 정보를 테이블, 페이지네이션, 리스트 그룹(필터링)으로 제공하는 페이지를 제작해봅니다.
+
+![](assets/movidly.png)
+
+### 프로젝트 디렉토리
+
+프로젝트 실습 과정에서 제작할 디렉토리 구조를 미리 살펴봅시다.
+
+```sh
+src/
+├── App.css # 앱 스타일링
+├── App.jsx # 앱 컴포넌트
+├── components/ # 컴포넌트 디렉토리
+│   ├── Movies.jsx # 무비 컴포넌트
+│   └── common/ # 공통 컴포넌트
+│       ├── LikeButton.jsx # 라이크 버튼 컴포넌트
+│       ├── ListGroup.jsx # 리스트 그룹 컴포넌트
+│       └── Pagination.jsx # 페이지네이션 컴포넌트
+├── index.css # 엔트리 스타일링
+├── index.js # 엔트리
+├── services/ # 서비스
+│   ├── genreService.js # 장르 서비스
+│   └── movieService.js # 무비 서비스
+└── utils/ # 유틸리티 함수
+    └── paginate.js # 페이지네이트 유틸리티
+```
+
+<br>
+
+## 프로젝트 시작
+
 #### Create React App
 
 [yarn](https://yarnpkg.org) 패키지를 사용해 React 프로젝트 **Movidly**를 생성합니다.
@@ -86,7 +117,7 @@ src/
     └── movieService.js
 ```
 
-#### 프로젝트 시작
+#### 프로젝트 개발 서버 구동
 
 프로젝트를 시작한 후, 정상적으로 UI 프레임워크를 불러왔는지 확인합니다.
 
