@@ -1,44 +1,75 @@
-import React, { Component, Fragment } from 'react'
-import { paginate } from '../utils/paginate'
+import React, { Component } from 'react'
+
+// 스타일 컴포넌트
+import styled from 'styled-components'
 
 import { getMovies } from '../services/movieService'
-import { getGenres } from '../services/genreService'
+// import { getGenres } from '../services/genreService'
+import { paginate } from '../utils/paginate'
 
+import ListGroup from './common/ListGroup'
 import LikeButton from './common/LikeButton'
 import Pagination from './common/Pagination'
-import ListGroup from './common/ListGroup'
 
-const styles = {
-  poster: {
-    maxWidth: 80,
-    height: 'auto',
-    marginRight: 10,
+// React Redux 커넥트
+import { connect } from 'react-redux'
+// 액션
+import { addGenresAction, selectGenreAction } from '../store/actions/genres'
+
+// connect()에 전달할 첫번째 인자
+const mapStateToProps = ({ genres }) => ({
+  genres: genres.data,
+  selectedGenre: genres.selectedGenre,
+})
+// connect()에 전달할 두번째 인자
+const mapDispatchToProps = dispatch => ({
+  fetchGenres: genres => {
+    dispatch(addGenresAction(genres))
   },
-}
+  selectGenre: genre => {
+    dispatch(selectGenreAction(genre))
+  },
+})
 
-export default class Movies extends Component {
+// Poster 스타일 컴포넌트
+const Poster = styled.img`
+  max-width: 80px;
+  height: auto;
+  margin-right: 10px;
+`
+
+class Movies extends Component {
   state = {
     movies: [],
-    genres: [],
-    selectedGenre: null,
+    // genres: [],
+    // selectedGenre: null,
     currentPage: 1,
     pageSize: 4,
   }
 
   componentDidMount() {
+    // const allGenre = { _id: '*', name: '모든 장르' }
+    // const genres = [allGenre, ...getGenres()]
+
+    const { getGenres } = require('../services/genreService')
+    const genres = getGenres()
     const allGenre = { _id: '*', name: '모든 장르' }
-    const genres = [allGenre, ...getGenres()]
+    genres.unshift(allGenre)
+    this.props.fetchGenres(genres)
+    this.props.selectGenre(allGenre)
+
     this.setState({
       movies: getMovies(),
-      genres,
-      selectedGenre: allGenre,
+      // genres,
+      // selectedGenre: allGenre,
     })
   }
 
   handleItemSelect = (genre, e) => {
     e.preventDefault()
+    this.props.selectGenre(genre)
     this.setState({
-      selectedGenre: genre,
+      // selectedGenre: genre,
       currentPage: 1,
     })
   }
@@ -66,8 +97,8 @@ export default class Movies extends Component {
   }
 
   render() {
-    const { genres, selectedGenre, movies: allMovies, pageSize, currentPage } = this.state
-    // const { length: count } = allMovies
+    const { movies: allMovies, pageSize, currentPage } = this.state
+    const { genres, selectedGenre } = this.props
 
     const filteredMovies =
       selectedGenre && selectedGenre._id !== '*'
@@ -121,15 +152,14 @@ export default class Movies extends Component {
                 {movies.map(movie => (
                   <tr key={movie._id}>
                     <td>
-                      <img
+                      <Poster
                         className="img-thunbnail float-left"
                         src={movie.image}
-                        style={styles.poster}
                         width="80"
                         height="113"
                         alt=""
                       />
-                      <a href={movie.link} target="_blank" rel="noreferrer">
+                      <a href={movie.link} target="_blank" rel="noopener noreferrer">
                         {movie.title}
                       </a>
                     </td>
@@ -167,3 +197,10 @@ export default class Movies extends Component {
     }
   }
 }
+
+const connectedMovies = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Movies)
+
+export default connectedMovies

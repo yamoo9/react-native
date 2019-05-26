@@ -1,5 +1,5 @@
 import React from 'react'
-import {number, func} from 'prop-types'
+import { number, func } from 'prop-types'
 
 import _ from 'lodash'
 
@@ -13,7 +13,7 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
       <ul className="pagination">
         {pages.map(page => (
           <li key={page} className={`page-item ${activeClass(page)}`}>
-            <a onClick={e => onPageChange(page, e)} className="page-link" href="">
+            <a onClick={e => onPageChange(page, e)} className="page-link" href="#pagination-link">
               {page}
             </a>
           </li>
