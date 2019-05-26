@@ -20,25 +20,27 @@ const Poster = styled.img`
 
 export default class Movies extends Component {
   state = {
-    movies: [],
     currentPage: 1,
     pageSize: 4,
   }
 
   componentDidMount() {
     this.fetchData()
-
-    this.setState({
-      movies: getMovies(),
-    })
   }
 
   fetchData() {
+    const { fetchMovies, fetchGenres, selectGenre } = this.props
+
+    // 무비
+    const movies = getMovies()
+    fetchMovies(movies)
+
+    // 장르
     const genres = getGenres()
     const allGenre = { _id: '*', name: '모든 장르' }
     genres.unshift(allGenre)
-    this.props.fetchGenres(genres)
-    this.props.selectGenre(allGenre)
+    fetchGenres(genres)
+    selectGenre(allGenre)
   }
 
   handleItemSelect = (genre, e) => {
@@ -72,8 +74,8 @@ export default class Movies extends Component {
   }
 
   render() {
-    const { movies: allMovies, pageSize, currentPage } = this.state
-    const { genres, selectedGenre } = this.props
+    const { pageSize, currentPage } = this.state
+    const { movies: allMovies, genres, selectedGenre } = this.props
 
     const filteredMovies =
       selectedGenre && selectedGenre._id !== '*'
