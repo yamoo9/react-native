@@ -4,32 +4,12 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { getMovies } from '../services/movieService'
-// import { getGenres } from '../services/genreService'
+import { getGenres } from '../services/genreService'
 import { paginate } from '../utils/paginate'
 
 import ListGroup from './common/ListGroup'
 import LikeButton from './common/LikeButton'
 import Pagination from './common/Pagination'
-
-// React Redux 커넥트
-import { connect } from 'react-redux'
-// 액션
-import { addGenresAction, selectGenreAction } from '../store/actions/genres'
-
-// connect()에 전달할 첫번째 인자
-const mapStateToProps = ({ genres }) => ({
-  genres: genres.data,
-  selectedGenre: genres.selectedGenre,
-})
-// connect()에 전달할 두번째 인자
-const mapDispatchToProps = dispatch => ({
-  fetchGenres: genres => {
-    dispatch(addGenresAction(genres))
-  },
-  selectGenre: genre => {
-    dispatch(selectGenreAction(genre))
-  },
-})
 
 // Poster 스타일 컴포넌트
 const Poster = styled.img`
@@ -38,38 +18,33 @@ const Poster = styled.img`
   margin-right: 10px;
 `
 
-class Movies extends Component {
+export default class Movies extends Component {
   state = {
     movies: [],
-    // genres: [],
-    // selectedGenre: null,
     currentPage: 1,
     pageSize: 4,
   }
 
   componentDidMount() {
-    // const allGenre = { _id: '*', name: '모든 장르' }
-    // const genres = [allGenre, ...getGenres()]
+    this.fetchData()
 
-    const { getGenres } = require('../services/genreService')
+    this.setState({
+      movies: getMovies(),
+    })
+  }
+
+  fetchData() {
     const genres = getGenres()
     const allGenre = { _id: '*', name: '모든 장르' }
     genres.unshift(allGenre)
     this.props.fetchGenres(genres)
     this.props.selectGenre(allGenre)
-
-    this.setState({
-      movies: getMovies(),
-      // genres,
-      // selectedGenre: allGenre,
-    })
   }
 
   handleItemSelect = (genre, e) => {
     e.preventDefault()
     this.props.selectGenre(genre)
     this.setState({
-      // selectedGenre: genre,
       currentPage: 1,
     })
   }
@@ -197,10 +172,3 @@ class Movies extends Component {
     }
   }
 }
-
-const connectedMovies = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Movies)
-
-export default connectedMovies

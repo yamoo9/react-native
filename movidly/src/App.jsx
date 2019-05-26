@@ -2,14 +2,14 @@ import React from 'react'
 import './App.css'
 
 import Navbar from './components/Navbar'
-import Movies from './components/Movies'
+import MoviesContainer from './containers/MoviesContainer'
 
 function App() {
   return (
     <div className="App">
       <div className="container" role="main">
         <Navbar />
-        <Movies />
+        <MoviesContainer />
       </div>
     </div>
   )
