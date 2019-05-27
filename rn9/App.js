@@ -10,10 +10,10 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
+  ios: '다시로드하려면 Cmd R을 누르십시오.,\n' + 'Cmd+D 또는 폰을 흔들어 개발 메뉴를 표시합니다.',
   android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
+    '키보드 R을 더블 탭하면 새로고침(리로드) 됩니다,\n' +
+    '폰을 흔들어 개발 메뉴를 표시합니다.',
 });
 
 type Props = {};
@@ -21,8 +21,8 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
+        <Text style={styles.welcome}>React Native에 오신 것을 환영합니다.!</Text>
+        <Text style={styles.instructions}>시작하려면 App.j를 수정하십시오.</Text>
         <Text style={styles.instructions}>{instructions}</Text>
       </View>
     );
