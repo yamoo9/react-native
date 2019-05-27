@@ -6,10 +6,12 @@ JavaScript + React → Native App(iOS, Android) 😍
 
 ## WonjuReview 앱
 
+React Native를 사용해 리뷰 앱 UI를 구현 실습합니다.
+
 ### 검색 & 필터링
 
-TextInput 컴포넌트 요소를 사용해 사용자의 검색 키워드를 입력 받아,
-리뷰 리스트를 필터링 해봅니다.
+[TextInput 컨트롤](https://yamoo9.github.io/react-native/guidebook/rn-handling-text-input.html) 문서를 참고하여, 사용자의 검색 키워드를 입력 받아,
+리뷰 리스트를 필터링 해봅니다. (TextInput 컴포넌트 요소 활용)
 
 ```jsx
 import React, { Component } from 'react'
