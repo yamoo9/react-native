@@ -20,7 +20,7 @@ module.exports = {
 
 ### Horizontal 스크롤 뷰
 
-[ScrollView](), [Dimensions]() 컴포넌트를 활용해
+[ScrollView](https://facebook.github.io/react-native/docs/scrollview), [Dimensions](https://facebook.github.io/react-native/docs/dimensions) 컴포넌트를 활용해
 수평 방향으로 나열된 콘텐츠를 스크롤 하는 간단한 앱을 만들어 봅니다.
 
 ```jsx
