@@ -6,21 +6,15 @@ JavaScript + React → Native App(iOS, Android) 😍
 
 ## WonjuReview 앱
 
-### 레이아웃
+### 검색 & 필터링
 
-Flexbox 레이아웃을 사용해 앱 화면을 구성해봅니다.
+TextInput 컴포넌트 요소를 사용해 사용자의 검색 키워드를 입력 받아,
+리뷰 리스트를 필터링 해봅니다.
 
 ```jsx
 import React, { Component } from 'react'
-// import { View, Text, Linking } from 'react-native'
-import { WebBrowser } from 'expo'
 import styled from 'styled-components'
-
-// Linking 컴포넌트 < React Native
-// https://facebook.github.io/react-native/docs/linking
-
-// WebBrowser 컴폰넌트 < Expo SDK
-// https://docs.expo.io/versions/latest/sdk/webbrowser/
+import { WebBrowser } from 'expo'
 
 const AppContainer = styled.View`
   flex: 1;
@@ -40,6 +34,16 @@ const AppHeadertext = styled.Text`
   color: #fff;
 `
 
+const AppSearchInput = styled.TextInput`
+  width: 100%;
+  border-bottom-width: 1px;
+  border-color: #cacaca;
+  padding: 20px;
+  font-size: 16px;
+  background: #f0f0f0;
+  color: #06f;
+`
+
 const AppList = styled.View`
   margin-top: 10px;
 `
@@ -47,9 +51,10 @@ const AppList = styled.View`
 const AppListItem = styled.View`
   flex-direction: row;
   padding: 2px;
+  background: ${props => (props.zebra ? '#f4f4f4' : 'transparent')};
 `
 
-const StyledAppListItemColumn = styled.View`
+const AppListItemColumn = styled.View`
   flex: ${props => props.flex || 1};
   justify-content: ${props => props.justifyContent || 'center'};
   align-items: ${props => props.alignItems || 'stretch'};
@@ -60,10 +65,6 @@ const StyledAppListItemColumn = styled.View`
 const ColumnText = styled.Text`
   font-size: 16px;
 `
-
-const AppListItemColumn = props => (
-  <StyledAppListItemColumn {...props}>{props.children}</StyledAppListItemColumn>
-)
 
 const ReviewTitle = styled.Text`
   margin-bottom: 4px;
@@ -78,6 +79,7 @@ const ReviewAddress = styled.Text`
 class WonjuReviewApp extends Component {
   state = {
     headline: '원주 가볼만 한 곳',
+    search: '',
     reviews: [
       {
         id: '1',
@@ -101,14 +103,26 @@ class WonjuReviewApp extends Component {
   }
 
   render() {
+    const keyword = this.state.search.trim()
+    const searchedReviews = this.state.reviews.filter(review => {
+      return review.title.includes(keyword) || review.address.includes(keyword)
+    })
+
     return (
       <AppContainer>
         <AppHeader>
           <AppHeadertext>{this.state.headline}</AppHeadertext>
+          <AppSearchInput
+            value={this.state.search}
+            placeholder="문득 떠오른 장소 이름을 검색해보세요."
+            // placeholder 스타일 속성
+            placeholderTextColor="#656562"
+            onChangeText={text => this.setState({ search: text })}
+          />
         </AppHeader>
         <AppList>
-          {this.state.reviews.map(review => (
-            <AppListItem key={review.id}>
+          {searchedReviews.map((review, index) => (
+            <AppListItem key={review.id} zebra={index % 2}>
               <AppListItemColumn alignItems="center">
                 <ColumnText>{review.id}</ColumnText>
               </AppListItemColumn>
@@ -118,9 +132,8 @@ class WonjuReviewApp extends Component {
               </AppListItemColumn>
               <AppListItemColumn>
                 <ColumnText onPress={() => WebBrowser.openBrowserAsync(review.link)}>
-                  link
+                  보기
                 </ColumnText>
-                {/* <ColumnText onPress={() => Linking.openURL(review.link)}>link</ColumnText> */}
               </AppListItemColumn>
             </AppListItem>
           ))}
