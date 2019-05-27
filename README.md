@@ -6,9 +6,11 @@ JavaScript + React → Native App(iOS, Android) 😍
 
 ## WonjuReview 앱
 
+React Native를 사용해 리뷰 앱 UI를 구현 실습합니다.
+
 ### 레이아웃
 
-Flexbox 레이아웃을 사용해 앱 화면을 구성해봅니다.
+[Flexbox 레이아웃](https://yamoo9.github.io/react-native/guidebook/rn-layout-with-flexbox.html) 문서를 참고하여, 앱 화면을 구성해봅니다. (Flexbox 레이아웃 활용)
 
 ```jsx
 import React, { Component } from 'react'
