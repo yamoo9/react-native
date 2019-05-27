@@ -1,29 +1,3 @@
-# React Native 러닝 가이드
-
-JavaScript + React → Native App(iOS, Android) 😍
-
-<br>
-
-## React Native 앱
-
-### jsx 확장자 설정
-
-프로젝트 루트에 `metro.config.js` 파일을 생성한 후 resolver.sourceExts 설정에 'jsx'를 추가합니다.
-
-```js
-module.exports = {
-  resolver: {
-    sourceExts: ['json', 'js', 'jsx'],
-  },
-}
-```
-
-### Horizontal 스크롤 뷰
-
-[ScrollView](), [Dimensions]() 컴포넌트를 활용해
-수평 방향으로 나열된 콘텐츠를 스크롤 하는 간단한 앱을 만들어 봅니다.
-
-```jsx
 import React, { Component } from 'react'
 import { ScrollView, Dimensions } from 'react-native'
 import styled from 'styled-components/native'
@@ -102,4 +76,3 @@ export default class App extends Component {
     )
   }
 }
-```
