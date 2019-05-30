@@ -1,19 +1,26 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "eject": "expo eject"
+    "start": "adb reverse tcp:3000 tcp:3000 && expo start",
+    "android": "adb reverse tcp:3000 tcp:3000 && expo start --android",
+    "ios": "open -a Simulator && expo start --ios",
+    "eject": "expo eject",
+    "devtools": "react-devtools"
   },
   "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "@react-native-community/async-storage": "^1.4.0",
+    "axios": "^0.18.0",
     "expo": "^32.0.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
+    "react-native-keyboard-aware-scroll-view": "^0.8.0",
+    "react-navigation": "^3.9.1",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.0.0"
+    "babel-preset-expo": "^5.0.0",
+    "react-devtools": "^3.6.1"
   },
   "private": true
 }
