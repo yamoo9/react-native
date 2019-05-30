@@ -50,13 +50,7 @@ class Movies extends Component {
   }
 
   render() {
-    const {
-      genres,
-      selectedGenre,
-      currentPage,
-      pageSize,
-      movies: allMovies,
-    } = this.state
+    const { genres, selectedGenre, currentPage, pageSize, movies: allMovies } = this.state
 
     const { length: count } = this.state.movies
 
@@ -78,14 +72,9 @@ class Movies extends Component {
         </div>
         <div className="col">
           <p
-            className={
-              filteredMovies.length
-                ? 'alert alert-primary'
-                : 'alert alert-warning'
-            }
+            className={filteredMovies.length ? 'alert alert-primary' : 'alert alert-warning'}
             role="alert">
-            데이터베이스에 존재하는 영화 정보는 <b>{filteredMovies.length}</b>개
-            입니다.
+            데이터베이스에 존재하는 영화 정보는 <b>{filteredMovies.length}</b>개 입니다.
           </p>
           <table className="table">
             <caption className="sr-only">무비 대여/평점 표</caption>
@@ -115,15 +104,10 @@ class Movies extends Component {
                   <td>{movie.numberInStock}</td>
                   <td>{movie.dailyRentalRate}</td>
                   <td>
-                    <LikeButton
-                      liked={movie.like}
-                      onToogleLike={e => this.handleLike(movie)}
-                    />
+                    <LikeButton liked={movie.like} onToogleLike={e => this.handleLike(movie)} />
                   </td>
                   <td>
-                    <button
-                      onClick={e => this.handleDelete(movie)}
-                      className="btn btn-dark btn-sm">
+                    <button onClick={e => this.handleDelete(movie)} className="btn btn-dark btn-sm">
                       제거
                     </button>
                   </td>
